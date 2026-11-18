@@ -31,6 +31,8 @@ and start studying.
 - [Question bank](#question-bank)
 - [Study modes](#study-modes)
 - [Exam simulation](#exam-simulation)
+- [Weak spots](#weak-spots)
+- [Traps and key rules](#traps-and-key-rules)
 - [Study timer](#study-timer)
 - [Progress and storage](#progress-and-storage)
 - [Keyboard shortcuts](#keyboard-shortcuts)
@@ -47,6 +49,10 @@ and start studying.
 | Exam simulation | 60 questions, 120 minutes, grouped by scenario, no feedback until you submit, estimated score out of 1,000 |
 | Scenarios | Every question is set in one of the 6 exam scenarios, shown before the question as on the exam |
 | Mastery tracking | Every card moves through New → Learning → Familiar → Mastered |
+| Weak spots | Accuracy per task statement, an estimated readiness score, and one-click sessions for your weakest areas |
+| Not sure | Mark a guess before you answer; a lucky right answer still counts as weak |
+| Traps | Every wrong option is tagged with one of 12 distractor patterns, and the page tracks which ones catch you |
+| Key rules | A last-minute review sheet: one rule per task statement (30) plus the trap guide |
 | Decks | One deck per task statement (30), grouped under the 5 exam domains |
 | Diagrams | 60 inline SVG diagrams explain the answers, and you can enlarge them |
 | Study timer | Plan a session (120 minutes by default) with optional Pomodoro breaks and an estimate of how many cards fit |
@@ -143,6 +149,11 @@ In the **Decks and progress** panel you can choose domains and task
 statements, show only cards you haven't mastered, and turn shuffle on or
 off. When you finish a deck, you can restudy only the cards you missed.
 
+In multiple choice, press **Not sure** (or `U`) before you answer when
+you're guessing. A right answer marked this way counts as half, so the
+question stays on your weak-spot list until you answer it with confidence.
+After you answer, every wrong option shows the trap it belongs to.
+
 ## Exam simulation
 
 **Take the exam** opens a timed run that's as close to the real exam as the
@@ -173,6 +184,63 @@ The official exam reports a scaled score, and its conversion isn't
 published. Treat the estimate as a guide only. Past attempts are listed in
 the decks panel, and you can clear them without losing study progress.
 
+Every exam answer also feeds the weak-spots panel. A question you flagged
+and got right counts as a guess.
+
+## Weak spots
+
+The **Weak spots** panel in the decks column collects every answer you
+give: in multiple choice, in flashcards (your own grade) and in the exam.
+For each question it keeps your last three results: right and sure, right
+but unsure, or wrong. From that it shows:
+
+- **Estimated readiness.** The same 100–1,000 scale as the exam, with
+  every question you haven't answered yet counted as a guess (25%):
+
+  ```text
+  readiness = 100 + 900 × average(score per question)
+  score = share of the last 3 answers that were right (an unsure right answer counts as half)
+  ```
+
+  Questions you've already seen are easier to remember, so treat it as a
+  ceiling, not a forecast.
+- **Weakest task statements.** Up to five task statements under 85%,
+  weakest first.
+- **One-click sessions.** *Study these* (every card in those task
+  statements), *Missed or unsure* (questions whose last answer wasn't a
+  confident right one) and *Not practiced yet*.
+- **Traps you fall for.** The three distractor patterns that have caught
+  you most, with a tip for spotting each one.
+
+## Traps and key rules
+
+Wrong options in scenario questions tend to follow a few patterns. Every
+wrong option in the bank is tagged with one of twelve:
+
+| Trap | What it looks like |
+|---|---|
+| Asks the prompt for a guarantee | Stronger wording or "be careful" where code, a hook or a schema must enforce it |
+| Tunes the wrong thing | temperature, max_tokens, a bigger window or a timeout that doesn't touch the cause |
+| Invented behavior | A feature described as working in a way it doesn't |
+| Wrong tool, file or scope | Glob vs Grep, PreToolUse vs PostToolUse, user vs project scope |
+| Wrong-sized pattern | Too heavy (classifier, custom server) or too light (direct edits for a big migration) |
+| More context, less focus | Pasting everything, every tool for every agent, one prompt over many files |
+| Patches around the problem | Resends, blind retries, best of N, a regex tuned to today's wording |
+| Hides the gap or invents data | Fake success, generic errors, averaged figures, forced values |
+| Throws out what works | Removing a tool, a category or a source for everyone |
+| Trusts an unreliable signal | Self-reported confidence, sentiment, averages, the typical case |
+| Pushes the job onto people | Asking customers to repeat facts or developers to remember a step |
+| Does not answer the question | A true statement that answers something else |
+
+**Key rules and traps** (link at the top of the panel) opens a review
+sheet with:
+
+- **Key rules.** One rule per task statement (30), grouped by domain. Weak
+  task statements are marked, and you can show only those. Read it the
+  night before and the morning of the exam.
+- **Traps.** The twelve patterns, how to spot each one, and how often each
+  one has caught you.
+
 ## Study timer
 
 **Plan your study time** sets a session of 30 min, 1 h, 2 h, or any length
@@ -194,14 +262,16 @@ from 5 to 600 minutes. It defaults to 120 minutes, the length of the exam.
 | `ccarf:timer:v1` | The running study timer, so it survives a reload |
 | `ccarf:exam:v1` | An exam in progress, so it survives a reload |
 | `ccarf:attempts:v1` | Your past exam attempts and their scores |
+| `ccarf:answers:v1` | Weak-spot stats: the last 3 results per question and how often each trap caught you |
 
 When the page is published as a **Claude Artifact**, it also saves progress
 to your Claude account through `window.claude` and merges it with the
 browser's copy, keeping the newest grade for each card. If the account
-isn't available, the page keeps working from the browser's copy.
+isn't available, the page keeps working from the browser's copy. The
+weak-spot stats stay in the browser only.
 
-**Reset progress** erases the levels for every card, both locally and in
-the account.
+**Reset progress** erases the levels and the weak-spot stats for every
+card. The levels are erased in the account too.
 
 ## Keyboard shortcuts
 
@@ -211,6 +281,7 @@ the account.
 | Study | `1` | Again |
 | Study | `2` | Got it |
 | Study / Exam | `A`, `B`, `C`… | Pick an option |
+| Multiple choice | `U` | Mark that you're not sure |
 | Exam | `Shift` + `A`, `B`, `C`… | Strike out an option |
 | Exam | `←` `→` | Previous / next question |
 | Exam | `F` | Flag the question |
@@ -224,9 +295,10 @@ The bank is the `<script type="application/json" id="bank">` block in
 | Key | Contents |
 |---|---|
 | `domains` | `d`, `name` `[en, es]`, `w` (exam weight) |
-| `objectives` | Task statements: `k`, `n` (number such as `1.1`), `d` (domain), `name` `[en, es]` |
+| `objectives` | Task statements: `k`, `n` (number such as `1.1`), `d` (domain), `name` `[en, es]`, `rule` `[en, es]` (the key rule) |
 | `scenarios` | `k`, `name` `[en, es]`, `desc` `[en, es]` (the setting shown before each question) |
-| `cards` | `id`, `n`, `d`, `ob` (task statement), `sc` (scenario), `q` `[en, es]`, `o` (options as `[en, es]` pairs), `a` (correct option indexes), `x` and `w` (explanations), `fixed` (keep option order), `dia` (diagram), `src` |
+| `cards` | `id`, `n`, `d`, `ob` (task statement), `sc` (scenario), `q` `[en, es]`, `o` (options as `[en, es]` pairs), `a` (correct option indexes), `x` and `w` (explanations), `tr` (one trap key per option, `null` for correct ones), `fixed` (keep option order), `dia` (diagram), `src` |
+| `traps` | `k`, `name` `[en, es]`, `desc` `[en, es]`, `spot` `[en, es]` (how to recognize it) |
 | `dias` | Inline SVG diagrams, keyed by the id that a card's `dia` names |
 | `exam` | `minutes`, `pass`, and `tips` |
 | `defaults` | The starting study mode and timer settings |
@@ -242,6 +314,9 @@ After an edit:
   Spanish entry.
 - **Use `a` with two indexes for "choose two" questions.** The card and
   the exam rules pick this up on their own.
+- **Tag every wrong option.** `tr` needs one entry per option: a key from
+  `traps` for each wrong option and `null` for each correct one.
+- **Give every task statement a `rule`.** The key-rules sheet lists them.
 - **Check the JSON.** A syntax error stops the whole page from loading, so
   open it in a browser and watch the console.
 
