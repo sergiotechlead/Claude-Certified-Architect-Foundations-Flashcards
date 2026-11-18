@@ -458,6 +458,7 @@ pre.code code { color: inherit; font-size: inherit; overflow-wrap: normal; }
 .wk-traps li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; align-items: baseline; font-size: .9rem; }
 .wk-traps .small { grid-column: 1 / -1; font-size: .84rem; line-height: 1.4; }
 .rd-bar i.lo { background: var(--bad); }
+.wk-list .wk-lesson { grid-column: 1 / -1; justify-self: start; padding: 0; font-size: .8rem; margin-top: -2px; }
 .rd-bar i.mid { background: #d97706; }
 .weak .stack-btns { display: flex; flex-wrap: wrap; gap: 8px; }
 .weak .stack-btns .btn { min-height: 42px; padding: 8px 12px; font-size: .9rem; }
@@ -489,7 +490,87 @@ pre.code code { color: inherit; font-size: inherit; overflow-wrap: normal; }
 .gd-spot { color: var(--muted); font-size: .92rem; }
 .gd-spot .wn-l { display: block; font-size: .68rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
 
-@media (prefers-reduced-motion: reduce) { .bar > i { transition: none; } .breath::before { animation: none; } }
+/* ---------- A.R.C.H.I.E., the study assistant ---------- */
+.archie { display: grid; gap: 12px; padding: 16px; border: 1px solid var(--rule); border-radius: 14px;
+          background: linear-gradient(180deg, var(--accent-soft), transparent 140px), var(--surface); }
+.ar-head { display: flex; align-items: center; gap: 12px; }
+.ar-orb { width: 36px; height: 36px; border-radius: 50%; flex: none;
+          background: radial-gradient(circle at 35% 32%, #ffffff 0 7%, var(--accent) 34%, #1d3d66 78%);
+          box-shadow: 0 0 0 3px var(--accent-soft), 0 0 14px rgba(109, 170, 245, .45); }
+.archie.speaking .ar-orb { animation: arPulse 1.3s ease-in-out infinite; }
+@keyframes arPulse { 50% { transform: scale(1.07); box-shadow: 0 0 0 5px var(--accent-soft), 0 0 22px rgba(109, 170, 245, .8); } }
+.ar-titles { min-width: 0; flex: 1; }
+.decks .ar-name { margin: 0; font: 700 1.05rem/1.15 var(--font-display); letter-spacing: .1em; }
+.ar-sub { margin: 2px 0 0; color: var(--muted); font-size: .74rem; line-height: 1.35; }
+#archie-body { display: grid; gap: 12px; min-width: 0; }
+#archie-body > .eyebrow { margin: 4px 0 -4px; }
+.ar-say { margin: 0; font-size: .93rem; line-height: 1.55; }
+.ar-meta { margin: 0; color: var(--muted); font-size: .86rem; }
+.ar-meta .linkbtn { margin-left: 6px; padding: 0; font-size: .84rem; }
+.ar-row { display: flex; flex-wrap: wrap; gap: 10px 12px; align-items: flex-end; }
+.ar-field { display: grid; gap: 4px; color: var(--muted); font-size: .8rem; font-weight: 600; }
+.ar-field input[type="date"], .ar-field select { min-height: 40px; padding: 6px 8px; border-radius: 8px; border: 1px solid var(--line-strong);
+          background: var(--surface-2); color: var(--fg); font: 500 .92rem var(--font-body); color-scheme: inherit; }
+.ar-field input[type="range"] { accent-color: var(--accent); width: 100%; }
+.ar-row .btn { min-height: 40px; padding: 6px 14px; font-size: .9rem; }
+.ar-tasks { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.ar-tasks li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 3px 10px; align-items: center; padding: 10px 12px;
+               border-radius: 10px; border: 1px solid var(--line); background: var(--surface-2); }
+.ar-tasks li.done { opacity: .62; }
+.ar-tasks .ar-t { font-weight: 700; font-size: .92rem; line-height: 1.3; }
+.ar-tasks .ar-t .ok { color: var(--ok); margin-right: 4px; }
+.ar-tasks .ar-m { color: var(--muted); font-size: .8rem; line-height: 1.35; font-variant-numeric: tabular-nums; }
+.ar-tasks .btn { grid-column: 2; grid-row: 1 / span 2; min-height: 38px; padding: 6px 12px; font-size: .86rem; }
+.ar-links { display: flex; flex-wrap: wrap; gap: 2px 16px; }
+.ar-links .linkbtn { font-size: .84rem; }
+.ar-voice-now { line-height: 1.5; }
+.ar-voice-now svg { width: 15px; height: 15px; margin-right: 6px; vertical-align: -2px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.ar-voice-now .linkbtn { margin-left: 8px; }
+.archie, .ar-field { min-width: 0; }
+.ar-voice .ar-field select { width: 100%; max-width: 100%; min-width: 0; }
+.ar-voice optgroup { font-weight: 700; }
+.ar-voice summary { cursor: pointer; color: var(--accent); font-weight: 600; font-size: .86rem; }
+.ar-voice[open] { display: grid; gap: 10px; }
+.ar-voice .note { margin: 0; }
+.ar-voice .btn { justify-self: start; min-height: 38px; padding: 6px 12px; font-size: .86rem; }
+.ar-cmd { display: flex; gap: 8px; }
+.ar-cmd input { flex: 1; min-width: 0; min-height: 44px; padding: 8px 12px; border-radius: 10px; border: 1px solid var(--line-strong);
+                background: var(--surface-2); color: var(--fg); font: 500 .95rem var(--font-body); }
+.ar-cmd input::placeholder { color: var(--faint); }
+.ar-cmd input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.ar-cmd .btn { flex: 0 0 auto; min-height: 44px; padding: 6px 18px; font-size: .95rem; }
+.ar-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: -4px; }
+.ar-chips button { min-height: 30px; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--line-strong); background: none; color: var(--muted);
+                   font: 600 .78rem var(--font-body); cursor: pointer; }
+.ar-chips button:hover { color: var(--fg); border-color: var(--muted); }
+.ar-reply { margin: 0; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--rule); background: var(--accent-soft); font-size: .92rem; line-height: 1.5; }
+.ar-reply::before { content: "A.R.C.H.I.E. "; color: var(--accent); font-weight: 700; font-size: .78rem; letter-spacing: .08em; }
+.ar-jump-wrap { margin: -6px 0 0; }
+@media (min-width: 960px) { .ar-jump-wrap { display: none; } }
+html.exam-on .ar-jump-wrap { display: none; }
+.card-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.card-tools .unsure { align-self: auto; }
+.speak { display: inline-flex; align-items: center; gap: 6px; min-height: 34px; padding: 4px 12px; border-radius: 6px; cursor: pointer;
+         border: 1px solid var(--line-strong); background: none; color: var(--muted); font: 600 .88rem var(--font-body); }
+.speak svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.speak[aria-pressed="true"] { border-color: var(--accent); color: var(--fg); background: var(--accent-soft); }
+.speak kbd { display: none; font: 700 .72rem var(--font-mono); margin-left: 4px; padding: 1px 5px; border-radius: 4px; border: 1px solid currentColor; opacity: .65; }
+@media (hover: hover) and (min-width: 960px) { .speak kbd { display: inline-block; } }
+.gd-tools { display: flex; justify-content: center; }
+.gd-list li.focus { border-left-color: var(--accent); background: var(--accent-soft); border-radius: 0 8px 8px 0; padding-block: 8px; }
+.gd-list .linkbtn { grid-column: 2; padding: 0; font-size: .82rem; }
+.gd-lesson { display: grid; gap: 14px; }
+.sheet.guide .gd-lesson .eyebrow { text-align: left; }
+.gd-lesson h3 { margin: 0; font: 700 1.25rem/1.25 var(--font-display); }
+.ls-block { display: grid; gap: 6px; }
+.ls-points { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; line-height: 1.5; }
+.ls-points .small { display: block; }
+.ck-list { margin: 0; padding-left: 1.3em; display: grid; gap: 8px; line-height: 1.5; }
+.ck-list li::marker { color: var(--accent); font-weight: 700; }
+#guide-body .stack-btns { display: flex; flex-wrap: wrap; gap: 10px; }
+#guide-body .stack-btns .btn { flex: 0 1 auto; min-height: 44px; font-size: .94rem; }
+
+@media (prefers-reduced-motion: reduce) { .bar > i { transition: none; } .breath::before { animation: none; } .archie.speaking .ar-orb { animation: none; } }
 </style>
 
 <div class="app" id="app" data-lang="en">
@@ -562,6 +643,8 @@ pre.code code { color: inherit; font-size: inherit; overflow-wrap: normal; }
       </div>
     </section>
 
+    <p class="ar-jump-wrap"><a class="linkbtn" href="#archie" id="ar-jump" data-t="arJump">A.R.C.H.I.E. · today's plan</a></p>
+
     <div class="card-wrap" id="card-wrap" data-stack="3">
       <article class="card" id="card" aria-live="polite">
         <header class="card-head" id="card-head"></header>
@@ -591,6 +674,14 @@ pre.code code { color: inherit; font-size: inherit; overflow-wrap: normal; }
     </section>
     <p class="lock-note" id="lock-note" hidden><svg viewBox="0 0 14 14" aria-hidden="true"><rect x="2.5" y="6.2" width="9" height="6.3" rx="1.4"/><path d="M4.6 6.2V4.4a2.4 2.4 0 0 1 4.8 0v1.8"/></svg><span data-t="lockNote">Decks and study modes are locked during the exam.</span></p>
     <div class="decks-body" id="decks-body">
+    <section class="archie" id="archie" aria-labelledby="archie-h" tabindex="-1">
+      <div class="ar-head"><span class="ar-orb" aria-hidden="true"></span>
+        <div class="ar-titles"><h2 class="ar-name" id="archie-h">A.R.C.H.I.E.</h2><p class="ar-sub" data-t="arSub">Architect Review &amp; Certification Helper for Interactive Exam-prep</p></div></div>
+      <form class="ar-cmd" id="ar-cmd" autocomplete="off"><input type="text" id="ar-cmd-in" enterkeyhint="go" spellcheck="false"><button type="submit" class="btn primary" id="ar-cmd-go">Go</button></form>
+      <div class="ar-chips" id="ar-chips"></div>
+      <p class="ar-reply" id="ar-reply" role="status" hidden></p>
+      <div id="archie-body"></div>
+    </section>
     <h2 id="decks-h" data-t="decksH">Decks and progress</h2>
     <div class="overall">
       <p class="big" id="overall-text"></p>
@@ -734,7 +825,7 @@ var T = {
     reset: 'Reset progress', resetAsk: 'Erase progress and weak-spot stats for all {n} cards?', erase: 'Erase', cancel: 'Cancel',
     savedLocal: 'Progress is saved in this browser.',
     savedCloud: 'Progress is saved to your Claude account and follows you to your other devices.',
-    keys: 'Keys: Space turns the card, 1 Again, 2 Got it, letter keys pick an option, U marks that you are not sure.',
+    keys: 'Keys: Space turns the card, 1 Again, 2 Got it, letter keys pick an option, U marks that you are not sure, R reads aloud.',
     langL: 'Language', modeL: 'Practice mode', filterL: 'Which cards', themeL: 'Theme', themeAuto: 'Auto', themeLight: 'Light', themeDark: 'Dark',
     byline: 'Created by Sergio Beleño', footNote: '120 practice questions in the proportions of the Claude Certified Architect (Foundations) exam guide, version 1.0, whose exam has 60 questions, 120 minutes and a pass mark of 720 on a scale of 100 to 1,000. The guide gives a weight for each of the 5 domains and lists 30 task statements without weights, so the count per domain is rounded from its weight (32, 22, 24, 24 and 18 here; 16, 11, 12, 12 and 9 per exam), with at least two questions per task statement. Each question is set in one of the six exam scenarios; the exam presents four of them. Ten questions ask for two answers, as multiple-response items do. Unofficial study aid. Every question was written for this page from the public exam guide, and none is a real exam item. Advice from a candidate who passed: start with the official Anthropic courses and their hands-on exercises with the Claude API, then practice the question format with mock exams such as claudecertificationguide.com. The real scenarios are longer than the ones here. Created by Sergio Beleño. Take the exam draws 60 of the 120 questions, with the same number per task statement as the exam proportions, for one timed simulation; its score on the 100 to 1,000 scale is an estimate, because the official conversion is not published.',
     tmOpen: 'Plan your study time', tmTotal: 'Study time', tmMin: 'min', tmPomo: 'Pomodoro breaks', tmFocusL: 'Focus', tmBreakL: 'Break',
@@ -784,7 +875,7 @@ var T = {
     resYour: 'Your answer', resNone: 'Not answered',
     attemptsH: 'Exam attempts', atPass: 'Pass', atFail: 'Below {p}',
     atClear: 'Clear attempts', atAsk: 'Erase all {n} exam attempts? Your study progress stays.', atAsk1: 'Erase your exam attempt? Your study progress stays.',
-    keysExam: 'Keys: letter keys pick an option, Shift + letter strikes it out, ← and → move between questions, F flags the question.',
+    keysExam: 'Keys: letter keys pick an option, Shift + letter strikes it out, ← and → move between questions, F flags the question, R reads it aloud.',
     notSure: 'Not sure', correctGuess: 'Correct, but you were not sure. It stays on your weak-spot list until you answer it with confidence.', trapL: 'Trap',
     weakH: 'Weak spots', guideOpen: 'Key rules and traps',
     wkEmpty: 'Answer questions in multiple choice or take the exam. This panel then shows your weakest task statements, the traps you fall for and an estimated readiness.',
@@ -798,7 +889,58 @@ var T = {
     gdWeakNone: 'No weak task statements yet. Practice in multiple choice or take the exam first.',
     gdIntro: 'One rule for each task statement in the exam guide. Read them the night before and the morning of the exam.',
     gdTrapIntro: 'Wrong options in scenario questions tend to follow a few patterns. Once you recognize them, you can rule out options in questions you have never seen.',
-    gdSpot: 'How to spot it', gdFell: 'You fell for it {f} of {s} times.', gdWeak: 'weak', close: 'Close'
+    gdSpot: 'How to spot it', gdFell: 'You fell for it {f} of {s} times.', gdWeak: 'weak', close: 'Close',
+    arSub: 'Architect Review & Certification Helper for Interactive Exam-prep', arJump: 'A.R.C.H.I.E. · today\'s plan', arRead: 'Read aloud',
+    arMorning: 'Good morning.', arAfternoon: 'Good afternoon.', arEvening: 'Good evening.',
+    arNoDate: 'Set your exam date and I will plan every day until then.', arPast: 'Your exam date has passed. Set a new one and I will plan again.',
+    arToday: 'Your exam is today: light review only.', arTomorrow: 'Your exam is tomorrow, so today is a light review.', arDays: '{n} days to your exam.',
+    arAbove: 'Estimated readiness is {s}, above the pass mark of {p}. Keep it steady.',
+    arBelow: 'Estimated readiness is {s} and the pass mark is {p}: about {g} points to go.',
+    arMeasure: 'Answer a few questions so I can measure your readiness.',
+    arPlanSum: 'Today I planned {n} tasks, about {m}.', arPlanSum1: 'Today I planned 1 task, about {m}.', arPlanDone: 'Everything planned for today is done. Well done.',
+    arFocus: 'Focus on {list}.', arAnd: ' and ',
+    arDateL: 'Exam date', arMinL: 'Study time per day', arSave: 'Save', arExamOn: 'Exam {d} · {m} a day', arChange: 'Change',
+    arTodayH: 'Today\'s plan', arNothing: 'Nothing pending today. Take an exam simulation or ask me for a lesson.', arPastNote: 'Set a new exam date to plan again.',
+    arSim: 'Exam simulation', arSimM: '60 questions · {m} · measures your readiness',
+    arWeak: 'Weak spots: {list}', arReview: 'Review what you missed or guessed', arNew: 'New questions', arMix: 'Mixed practice',
+    arQM: '{n} questions · about {m} · {d} done',
+    arTrap: 'Trap focus: {name}', arTrapM: 'How to spot it · about 3 min', arRules: 'Key rules, read aloud', arRulesM: '30 rules · about 10 min',
+    arFinal: 'Exam-day review', arFinalM: 'Checklist and your top traps · about 5 min',
+    arStart: 'Start', arGo: 'Continue', arAgain: 'Again', arOpen: 'Open', arListen: 'Listen',
+    arBrief: 'Read my briefing', arStop: 'Stop reading', arRebuild: 'Rebuild today\'s plan', arFinalLink: 'Exam-day review',
+    arVoiceH: 'Voice and reading', arAuto: 'Read each question and answer automatically', arTalk: 'Speak my replies', arRate: 'Speed {r}×',
+    arReadLang: 'Read in', arVoiceL: 'Voice', arVoiceAuto: 'Automatic (US English, male)', arNoVoice: 'This browser has no voice for this language.',
+    arTest: 'Test the voice', arTestLine: 'Hello, I am Archie. I will read your questions aloud.',
+    arNoSpeech: 'This browser cannot read aloud, so A.R.C.H.I.E. works in text only.',
+    arCmdPh: 'Archie, let\'s study 45 minutes', arCmdL: 'Tell A.R.C.H.I.E. what to do', arGoBtn: 'Go',
+    arChips: 'Let\'s study 45 minutes|Read the question|Lesson 1.5|Today\'s plan|Help',
+    arHelp: 'Try "let\'s study 45 minutes" (or "an hour and a half", "2 pomodoros"), "read the question", "stop", "lesson 1.5", "key rules", "traps", "exam" or "today\'s plan". If I do not understand you, I start a 30-minute session.',
+    arStopOk: 'Stopped.', arTimerStop: 'Study timer stopped.',
+    arNoTime: 'I did not catch a time, so I set 30 minutes.', arDidntGet: 'I did not understand that, so let\'s study for 30 minutes.',
+    arStudyGo: 'Starting {t} of study: {b} focus blocks of {f} min with {k}-minute breaks. I queued {n} questions, starting with today\'s plan.',
+    arStudyGo1: 'Starting {t} of study. I queued {n} questions, starting with today\'s plan.',
+    arLessonOk: 'Here is the lesson for {n}, {name}.', arLessonNo: 'Tell me the task statement number, for example "lesson 1.5".',
+    arRulesOk: 'Reading the 30 key rules.', arTrapsOk: 'Here are the twelve traps and how to spot them.',
+    arExamOk: 'Opening the exam simulation. Read the instructions and start when you are ready.',
+    arPlanOk: 'Here is today\'s plan.', arNoCard: 'There is no question on screen to read.',
+    arHour: 'hour', arHours: 'hours', arMinutes: 'minutes',
+    arVoiceNow: 'Voice: {v}', arVoiceChange: 'Change voice', arVoiceLoading: 'Loading the voices of this browser…', arVoiceFor: 'Voice for {l}',
+    arLangEn: 'English', arLangEs: 'Spanish', arMaleGroup: 'Male voices', arLangGroup: 'Other {l} voices', arOtherGroup: 'All other voices',
+    arNoMaleShort: '(this device has no male {l} voice)',
+    arNoMale: 'This device has no male voice for {l}, so I use the best one available. Pick any voice above, even a male voice in another language, or add voices: on Windows in Settings › Time & language › Speech, on a Mac in System Settings › Accessibility › Spoken Content. Microsoft Edge has the most natural voices.',
+    ckH: 'Exam-day checklist',
+    ck1: 'Sleep, eat and check your setup (ID, a quiet room, the connection) before you start.',
+    ck2: 'Budget about 2 minutes per question. If one stalls you, flag it and move on.',
+    ck3: 'Read the scenario first, then work out what the question actually asks.',
+    ck4: 'Rule out options that match a trap: prompt-only fixes, invented features, the wrong tool or scope.',
+    ck5: 'In "choose two" questions, select exactly two. Review the flagged questions before you submit.',
+    lsTab: 'Lesson', lsEyebrow: 'Lesson · {n}', lsScore: 'Your score here: {pct}% · {a} of {n} questions answered', lsNew: 'You have not practiced this task statement yet.',
+    lsRule: 'Key rule', lsLearn: 'What its questions teach', lsTraps: 'Traps that appear here', lsPractice: 'Practice these {n} questions', lessonL: 'Lesson',
+    finalTab: 'Exam day', finalIntro: 'Read this before you start. Then close the page, breathe and trust your preparation.',
+    finalTraps: 'Your top traps', finalRules: 'Read the key rules aloud', gdRead: 'Read aloud',
+    spScenario: 'Scenario', spQuestion: 'Question', spChoose2: 'Choose two.', spOption: 'Option {l}.', spCorrect: 'Correct.', spWrong: 'Not quite.',
+    spGuess: 'But you were not sure, so it stays on your weak list.', spAnswer: 'The answer is', spAnswers: 'The answers are', spAnd: 'and',
+    spWhy: 'Why:', spSpot: 'How to spot it:', spRule: 'Key rule:'
   },
   es: {
     modeFlash: 'Tarjeta', modeMc: 'Opción múltiple', left1: 'Queda 1 tarjeta', leftN: 'Quedan {n} tarjetas',
@@ -822,7 +964,7 @@ var T = {
     reset: 'Borrar progreso', resetAsk: '¿Borrar el progreso y las estadísticas de puntos débiles de las {n} tarjetas?', erase: 'Borrar', cancel: 'Cancelar',
     savedLocal: 'El progreso se guarda en este navegador.',
     savedCloud: 'El progreso se guarda en tu cuenta de Claude y te acompaña en tus otros dispositivos.',
-    keys: 'Teclas: Espacio voltea la tarjeta, 1 Repetir, 2 Lo sé, las letras eligen una opción, U marca que no estás seguro.',
+    keys: 'Teclas: Espacio voltea la tarjeta, 1 Repetir, 2 Lo sé, las letras eligen una opción, U marca que no estás seguro, R lee en voz alta.',
     langL: 'Idioma', modeL: 'Modo de práctica', filterL: 'Qué tarjetas', themeL: 'Tema', themeAuto: 'Auto', themeLight: 'Claro', themeDark: 'Oscuro',
     byline: 'Creado por Sergio Beleño', footNote: '120 preguntas de práctica en las proporciones de la guía del examen Claude Certified Architect (Foundations), versión 1.0, cuyo examen tiene 60 preguntas, 120 minutos y aprobación con 720 en una escala de 100 a 1,000. La guía da un peso para cada uno de los 5 dominios y lista 30 enunciados de tarea sin pesos, así que la cantidad por dominio se redondea a partir de su peso (32, 22, 24, 24 y 18 aquí; 16, 11, 12, 12 y 9 por examen), con al menos dos preguntas por enunciado de tarea. Cada pregunta está ambientada en uno de los seis escenarios del examen; el examen presenta cuatro. Diez preguntas piden dos respuestas, como los ítems de respuesta múltiple. Material de estudio no oficial. Todas las preguntas se escribieron para esta página a partir de la guía pública del examen, y ninguna es un ítem real del examen. Consejo de alguien que aprobó: empieza con los cursos oficiales de Anthropic y sus ejercicios prácticos con la API de Claude, y luego practica el formato de las preguntas con simulacros como claudecertificationguide.com. Los escenarios reales son más largos que los de aquí. Creado por Sergio Beleño. Presentar el examen toma 60 de las 120 preguntas, con la misma cantidad por enunciado de tarea que las proporciones del examen, para un simulacro cronometrado; su puntaje en la escala de 100 a 1,000 es una estimación, porque la conversión oficial no se publica.',
     tmOpen: 'Planifica tu tiempo de estudio', tmTotal: 'Tiempo de estudio', tmMin: 'min', tmPomo: 'Descansos Pomodoro', tmFocusL: 'Enfoque', tmBreakL: 'Descanso',
@@ -872,7 +1014,7 @@ var T = {
     resYour: 'Tu respuesta', resNone: 'Sin responder',
     attemptsH: 'Intentos de examen', atPass: 'Aprobado', atFail: 'Bajo {p}',
     atClear: 'Borrar intentos', atAsk: '¿Borrar los {n} intentos de examen? Tu progreso de estudio se conserva.', atAsk1: '¿Borrar tu intento de examen? Tu progreso de estudio se conserva.',
-    keysExam: 'Teclas: las letras eligen una opción, Mayús + letra la tacha, ← y → cambian de pregunta, F marca la pregunta.',
+    keysExam: 'Teclas: las letras eligen una opción, Mayús + letra la tacha, ← y → cambian de pregunta, F marca la pregunta, R la lee en voz alta.',
     notSure: 'No estoy seguro', correctGuess: 'Correcto, pero no estabas seguro. Sigue en tu lista de puntos débiles hasta que la respondas con seguridad.', trapL: 'Trampa',
     weakH: 'Puntos débiles', guideOpen: 'Reglas clave y trampas',
     wkEmpty: 'Responde preguntas en opción múltiple o presenta el examen. Entonces este panel muestra tus enunciados de tarea más débiles, las trampas en las que caes y una preparación estimada.',
@@ -886,7 +1028,58 @@ var T = {
     gdWeakNone: 'Aún no hay enunciados de tarea débiles. Practica en opción múltiple o presenta el examen primero.',
     gdIntro: 'Una regla por cada enunciado de tarea de la guía del examen. Léelas la noche anterior y la mañana del examen.',
     gdTrapIntro: 'Las opciones incorrectas de las preguntas de escenario suelen seguir unos pocos patrones. Cuando aprendes a reconocerlos, puedes descartar opciones en preguntas que nunca has visto.',
-    gdSpot: 'Cómo detectarla', gdFell: 'Caíste {f} de {s} veces.', gdWeak: 'débil', close: 'Cerrar'
+    gdSpot: 'Cómo detectarla', gdFell: 'Caíste {f} de {s} veces.', gdWeak: 'débil', close: 'Cerrar',
+    arSub: 'Architect Review & Certification Helper for Interactive Exam-prep', arJump: 'A.R.C.H.I.E. · plan de hoy', arRead: 'Leer en voz alta',
+    arMorning: 'Buenos días.', arAfternoon: 'Buenas tardes.', arEvening: 'Buenas noches.',
+    arNoDate: 'Indica la fecha de tu examen y planearé cada día hasta entonces.', arPast: 'La fecha de tu examen ya pasó. Indica una nueva y volveré a planear.',
+    arToday: 'Tu examen es hoy: solo repaso ligero.', arTomorrow: 'Tu examen es mañana, así que hoy toca un repaso ligero.', arDays: 'Faltan {n} días para tu examen.',
+    arAbove: 'Tu preparación estimada es {s}, por encima de la aprobación de {p}. Mantén el ritmo.',
+    arBelow: 'Tu preparación estimada es {s} y la aprobación es {p}: te faltan unos {g} puntos.',
+    arMeasure: 'Responde algunas preguntas para que pueda medir tu preparación.',
+    arPlanSum: 'Para hoy planeé {n} tareas, cerca de {m}.', arPlanSum1: 'Para hoy planeé 1 tarea, cerca de {m}.', arPlanDone: 'Todo lo planeado para hoy está hecho. Bien hecho.',
+    arFocus: 'Concéntrate en {list}.', arAnd: ' y ',
+    arDateL: 'Fecha del examen', arMinL: 'Tiempo de estudio al día', arSave: 'Guardar', arExamOn: 'Examen {d} · {m} al día', arChange: 'Cambiar',
+    arTodayH: 'Plan de hoy', arNothing: 'No hay nada pendiente hoy. Presenta un simulacro o pídeme una lección.', arPastNote: 'Indica una nueva fecha de examen para volver a planear.',
+    arSim: 'Simulacro de examen', arSimM: '60 preguntas · {m} · mide tu preparación',
+    arWeak: 'Puntos débiles: {list}', arReview: 'Repasar lo que fallaste o adivinaste', arNew: 'Preguntas nuevas', arMix: 'Práctica mixta',
+    arQM: '{n} preguntas · cerca de {m} · {d} hechas',
+    arTrap: 'Trampa del día: {name}', arTrapM: 'Cómo detectarla · cerca de 3 min', arRules: 'Reglas clave, en voz alta', arRulesM: '30 reglas · cerca de 10 min',
+    arFinal: 'Repaso del día del examen', arFinalM: 'Lista de control y tus trampas principales · cerca de 5 min',
+    arStart: 'Empezar', arGo: 'Continuar', arAgain: 'Otra vez', arOpen: 'Abrir', arListen: 'Escuchar',
+    arBrief: 'Leer mi resumen', arStop: 'Dejar de leer', arRebuild: 'Rehacer el plan de hoy', arFinalLink: 'Repaso del día del examen',
+    arVoiceH: 'Voz y lectura', arAuto: 'Leer cada pregunta y respuesta automáticamente', arTalk: 'Decir mis respuestas en voz alta', arRate: 'Velocidad {r}×',
+    arReadLang: 'Leer en', arVoiceL: 'Voz', arVoiceAuto: 'Automática (hombre, EE. UU.)', arNoVoice: 'Este navegador no tiene una voz para este idioma.',
+    arTest: 'Probar la voz', arTestLine: 'Hola, soy Archie. Leeré tus preguntas en voz alta.',
+    arNoSpeech: 'Este navegador no puede leer en voz alta, así que A.R.C.H.I.E. funciona solo con texto.',
+    arCmdPh: 'Archie, estudiemos 45 minutos', arCmdL: 'Dile a A.R.C.H.I.E. qué hacer', arGoBtn: 'Ir',
+    arChips: 'Estudiemos 45 minutos|Lee la pregunta|Lección 1.5|Plan de hoy|Ayuda',
+    arHelp: 'Prueba "estudiemos 45 minutos" (o "una hora y media", "2 pomodoros"), "lee la pregunta", "para", "lección 1.5", "reglas clave", "trampas", "examen" o "plan de hoy". Si no te entiendo, empiezo una sesión de 30 minutos.',
+    arStopOk: 'Listo, me detuve.', arTimerStop: 'Temporizador de estudio detenido.',
+    arNoTime: 'No entendí el tiempo, así que puse 30 minutos.', arDidntGet: 'No entendí eso, así que estudiemos 30 minutos.',
+    arStudyGo: 'Empezamos {t} de estudio: {b} bloques de enfoque de {f} min con descansos de {k} min. Preparé {n} preguntas, empezando por el plan de hoy.',
+    arStudyGo1: 'Empezamos {t} de estudio. Preparé {n} preguntas, empezando por el plan de hoy.',
+    arLessonOk: 'Aquí está la lección de {n}, {name}.', arLessonNo: 'Dime el número del enunciado de tarea, por ejemplo "lección 1.5".',
+    arRulesOk: 'Leyendo las 30 reglas clave.', arTrapsOk: 'Aquí están las doce trampas y cómo detectarlas.',
+    arExamOk: 'Abriendo el simulacro de examen. Lee las instrucciones y empieza cuando estés listo.',
+    arPlanOk: 'Este es el plan de hoy.', arNoCard: 'No hay ninguna pregunta en pantalla para leer.',
+    arHour: 'hora', arHours: 'horas', arMinutes: 'minutos',
+    arVoiceNow: 'Voz: {v}', arVoiceChange: 'Cambiar voz', arVoiceLoading: 'Cargando las voces de este navegador…', arVoiceFor: 'Voz para {l}',
+    arLangEn: 'inglés', arLangEs: 'español', arMaleGroup: 'Voces masculinas', arLangGroup: 'Otras voces en {l}', arOtherGroup: 'Todas las demás voces',
+    arNoMaleShort: '(este dispositivo no tiene una voz masculina en {l})',
+    arNoMale: 'Este dispositivo no tiene una voz masculina en {l}, así que uso la mejor disponible. Elige cualquier voz de la lista, incluso una voz masculina en otro idioma, o agrega voces: en Windows en Configuración › Hora e idioma › Voz, en Mac en Configuración del Sistema › Accesibilidad › Contenido leído. Microsoft Edge tiene las voces más naturales.',
+    ckH: 'Lista de control del día del examen',
+    ck1: 'Duerme, come y revisa tu entorno (identificación, un lugar tranquilo, la conexión) antes de empezar.',
+    ck2: 'Calcula unos 2 minutos por pregunta. Si una te atasca, márcala y sigue.',
+    ck3: 'Lee primero el escenario y luego identifica qué pide realmente la pregunta.',
+    ck4: 'Descarta las opciones que encajan con una trampa: arreglos solo con el prompt, funciones inventadas, la herramienta o el alcance equivocados.',
+    ck5: 'En las preguntas de "elige dos", selecciona exactamente dos. Revisa las marcadas antes de entregar.',
+    lsTab: 'Lección', lsEyebrow: 'Lección · {n}', lsScore: 'Tu puntaje aquí: {pct}% · {a} de {n} preguntas respondidas', lsNew: 'Aún no has practicado este enunciado de tarea.',
+    lsRule: 'Regla clave', lsLearn: 'Lo que enseñan sus preguntas', lsTraps: 'Trampas que aparecen aquí', lsPractice: 'Practicar estas {n} preguntas', lessonL: 'Lección',
+    finalTab: 'Día del examen', finalIntro: 'Lee esto antes de empezar. Luego cierra la página, respira y confía en tu preparación.',
+    finalTraps: 'Tus trampas principales', finalRules: 'Leer las reglas clave en voz alta', gdRead: 'Leer en voz alta',
+    spScenario: 'Escenario', spQuestion: 'Pregunta', spChoose2: 'Elige dos.', spOption: 'Opción {l}.', spCorrect: 'Correcto.', spWrong: 'No del todo.',
+    spGuess: 'Pero no estabas seguro, así que sigue en tu lista de puntos débiles.', spAnswer: 'La respuesta es', spAnswers: 'Las respuestas son', spAnd: 'y',
+    spWhy: 'Por qué:', spSpot: 'Cómo detectarla:', spRule: 'Regla clave:'
   }
 };
 
@@ -1004,7 +1197,8 @@ function optionsHTML(c, revealed) {
 function frontHTML(c) {
   if (c.kind === 'q') {
     var h = '<p class="eyebrow">' + t('question') + (OBJ[c.ob] ? ' · ' + (OBJ[c.ob].n ? esc(OBJ[c.ob].n) + ' ' : '') + esc(one(OBJ[c.ob].name)) : c.topic ? ' · ' + esc(c.topic) : '') + (SCN[c.sc] ? ' · ' + esc(one(SCN[c.sc].name)) : '') + (c.src === 'recall' ? ' · ' + t('recall') : '') + (c.a.length > 1 ? ' · ' + t('pick2') : '') + '</p><div class="q">' + bi(c.q) + '</div>';
-    return h + (isMc() ? unsureHTML() + optionsHTML(c, false) : '<p class="hint">' + t('think') + '</p>');
+    var tools = speakBtn() + (isMc() ? unsureHTML() : '');
+    return h + (tools ? '<div class="card-tools">' + tools + '</div>' : '') + (isMc() ? optionsHTML(c, false) : '<p class="hint">' + t('think') + '</p>');
   }
   if (c.kind === 'p') {
     return '<p class="eyebrow">' + t('param') + '</p><div class="pname">' + bi(c.name, esc) + '</div><p class="hint">' + t('paramHint') + '</p>';
@@ -1019,7 +1213,7 @@ function codeBlock(c) {
 function backHTML(c) {
   var h;
   if (c.kind === 'q') {
-    h = '<div class="recap">' + bi(c.q) + '</div>';
+    h = '<div class="recap">' + bi(c.q) + '</div>' + (SYN ? '<div class="card-tools">' + speakBtn() + '</div>' : '');
     if (isMc()) {
       if (cur.correct !== null) h += '<p class="verdict ' + (cur.correct ? 'good' : 'miss') + '">' + t(cur.correct ? 'correct' : 'wrong') + '</p>' +
                                      (cur.correct && cur.unsure ? '<p class="small">' + t('correctGuess') + '</p>' : '');
@@ -1077,6 +1271,7 @@ function renderCard() {
   if (!cur) {
     head.hidden = true; body.className = 'card-body done'; body.innerHTML = doneHTML(); card.classList.remove('flippable');
     flip.hidden = check.hidden = again.hidden = got.hidden = true; $('#actions').hidden = true;
+    cardChanged();
     return;
   }
   $('#actions').hidden = false; head.hidden = false; head.innerHTML = headHTML(cur.c);
@@ -1091,7 +1286,7 @@ function renderCard() {
   again.innerHTML = t('again') + '<kbd>1</kbd>'; got.innerHTML = t('got') + '<kbd>2</kbd>';
   var missedIt = cur.correct === false;
   again.className = 'btn' + (missedIt ? ' primary' : ''); got.className = 'btn' + (missedIt ? '' : ' primary');
-  fitDiagrams();
+  fitDiagrams(); cardChanged();
 }
 /* Diagram labels were measured in another typeface: squeeze any label that would now run wider than its box. */
 function fitDiagrams() {
@@ -1253,7 +1448,7 @@ function updateProgress() {
     if (b && st.n) b.innerHTML = barHTML(st);
   });
   $('#save-note').textContent = t(cloudOk ? 'savedCloud' : 'savedLocal');
-  renderWeak();
+  renderWeak(); renderArchie();
 }
 function applyText() {
   var app = $('#app'); app.dataset.lang = S.lang; app.lang = ui();
@@ -1389,6 +1584,7 @@ $('#card').addEventListener('click', function (e) {
     else if (act === 'missed') startSession(Object.keys(ses.missed));
     else if (act === 'showall') { S.filter = 'all'; saveSettings(); applyText(); startSession(); }
     else if (act === 'unsure') toggleUnsure();
+    else if (act === 'read') readCard();
     return;
   }
   if (cur && !cur.revealed && !isMc() && !e.target.closest('button, a, summary, details') && String(window.getSelection ? window.getSelection() : '') === '') reveal();
@@ -1406,6 +1602,7 @@ document.addEventListener('keydown', function (e) {
   if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
   var k = e.key.toLowerCase(), onControl = tag === 'BUTTON' || tag === 'SUMMARY' || tag === 'A';
   if ((k === ' ' || k === 'enter') && !onControl) { if (!cur.revealed) { e.preventDefault(); reveal(); } return; }
+  if (k === 'r') { readCard(); return; }
   if (cur.revealed) { if (k === '1') grade(false); else if (k === '2') grade(true); return; }
   if (k === 'u' && isMc()) { toggleUnsure(); return; }
   var pos = 'abcde'.indexOf(k);
@@ -1414,7 +1611,7 @@ document.addEventListener('keydown', function (e) {
 $('#reset-btn').addEventListener('click', function () { askReset(true); $('#reset-no').focus(); });
 $('#reset-no').addEventListener('click', function () { askReset(false); $('#reset-btn').focus(); });
 $('#reset-yes').addEventListener('click', function () {
-  P = {}; resetAt = Date.now(); saveProgress(); A = { q: {}, tr: {} }; saveAnswers(); askReset(false); updateProgress(); startSession(); $('#reset-btn').focus();
+  P = {}; resetAt = Date.now(); saveProgress(); A = { q: {}, tr: {} }; AR.plan = null; AR.day = { d: '', ans: {}, done: {} }; saveAnswers(); askReset(false); updateProgress(); startSession(); $('#reset-btn').focus();
 });
 function askReset(on) { $('#reset-btn').hidden = on; $('#reset-ask').hidden = $('#reset-yes').hidden = $('#reset-no').hidden = !on; }
 document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden' && dirty) { clearTimeout(saveTimer); flush(); } });
@@ -1661,6 +1858,7 @@ function gradeExam() {
 /* ---- entering, starting, leaving ---- */
 function openExam() {
   if (EX || busy) return;
+  stopSpeech();
   EX = { status: 'intro' };
   syncExamUI(); renderCard(); showIntro();
 }
@@ -1771,6 +1969,7 @@ function renderExam() {
   ['#btn-flip', '#btn-check', '#btn-again', '#btn-got'].forEach(function (s) { $(s).hidden = true; });
   $('#card').classList.remove('flippable');
   if (EX.status !== 'run') {
+    cardChanged();
     prev.hidden = next.hidden = true; $('#actions').hidden = true; wrap.dataset.stack = 0;
     $('#bar').style.width = EX.status === 'done' ? '100%' : '0%';
     $('#count').textContent = '';
@@ -1794,12 +1993,12 @@ function renderExam() {
   var sd = SCN[c.sc] && SCN[c.sc].desc;                // the scenario comes first, as on the exam
   body.innerHTML = (sd ? '<div class="scn-box"><p class="eyebrow">' + t('exScenario') + ' · ' + scnName(c) + '</p><div class="scn-text">' + bi(sd) + '</div></div>' : '') +
     '<p class="eyebrow">' + (scnName(c) && !sd ? t('exScenario') + ' · ' + scnName(c) : t('question')) + (c.a.length > 1 ? ' · ' + t('pick2') : '') + '</p>' +
-    '<div class="q">' + bi(c.q) + '</div>' + exOptsHTML(id) + (c.a.length > 1 ? '<p class="hint" id="ex-hint">' + exHint(id) + '</p>' : '');
+    '<div class="q">' + bi(c.q) + '</div>' + (SYN ? '<div class="card-tools">' + speakBtn() + '</div>' : '') + exOptsHTML(id) + (c.a.length > 1 ? '<p class="hint" id="ex-hint">' + exHint(id) + '</p>' : '');
   $('#actions').hidden = false; prev.hidden = next.hidden = false;
   prev.disabled = EX.at === 0;
   prev.innerHTML = t('exPrev') + '<kbd>←</kbd>';
   next.innerHTML = t(last ? 'exReview' : 'exNext') + (last ? '' : '<kbd>→</kbd>');
-  exStatus();
+  exStatus(); cardChanged();
 }
 function exOptsHTML(id) {                             // each option has a strike-out button beside it, like the exam's
   var c = BY[id], picked = EX.ans[id] || [], struck = (EX.strike = EX.strike || {})[id] || [], h = '<ol class="opts ex-opts">';
@@ -1939,6 +2138,7 @@ function examClick(e) {
   if (o && EX.status === 'run') { examPick(+o.dataset.opt); return; }
   var a = e.target.closest('[data-act]'); if (!a) return;
   var act = a.dataset.act;
+  if (act === 'read') { readCard(); return; }
   if (act === 'flag' && EX.status === 'run') toggleFlag();
   else if (act === 'ex-intro') showIntro();
   else if (act === 'ex-cancel') cancelIntro();
@@ -1956,6 +2156,7 @@ function examKeys(e) {                                 // true when the exam own
   if (k === 'arrowright') { e.preventDefault(); goQ(EX.at + 1); }
   else if (k === 'arrowleft') { e.preventDefault(); goQ(EX.at - 1); }
   else if (k === 'f') toggleFlag();
+  else if (k === 'r') readCard();
   else if (k.length === 1 && 'abcde'.indexOf(k) >= 0) {
     var order = EX.opt[exId()], p = 'abcde'.indexOf(k);
     if (p < order.length) { if (e.shiftKey) toggleStrike(order[p]); else examPick(order[p]); }
@@ -2026,9 +2227,10 @@ var A = { q: {}, tr: {} };
 })();
 var GUESS = 0.25, WEAK_AT = 0.85, GD = { tab: 'rules', weak: false, from: null };
 
-function saveAnswers() { store.set(KEY_A, A); renderWeak(); }
+function saveAnswers() { store.set(KEY_A, A); saveAR(); renderWeak(); renderArchie(); }
 function noteAnswer(id, ok, picked, unsure) {          // picked is null for a self-graded flashcard, which says nothing about traps
   var c = BY[id]; if (!c || c.kind !== 'q') return;
+  rollDay(); AR.day.ans[id] = 1;                         // today's plan counts what was answered today
   A.q[id] = ((A.q[id] || '') + (ok ? (unsure ? 'u' : '1') : '0')).slice(-3);
   if (!picked || !picked.length || !c.tr) return;
   var seen = {}, fell = {};
@@ -2096,7 +2298,8 @@ function renderWeak() {
     var p = Math.round(100 * x.avg);
     return '<li><span class="rd-name"><span class="num">' + esc(x.o.n) + '</span>' + nameHTML(x.o.name) + '</span>' +
            '<span class="rd-val">' + t('wkVal', { pct: p, a: x.a, n: x.ids.length }) + '</span>' +
-           '<span class="rd-bar" aria-hidden="true"><i class="' + (p < 50 ? 'lo' : 'mid') + '" style="width:' + Math.max(3, p) + '%"></i></span></li>';
+           '<span class="rd-bar" aria-hidden="true"><i class="' + (p < 50 ? 'lo' : 'mid') + '" style="width:' + Math.max(3, p) + '%"></i></span>' +
+           '<button type="button" class="linkbtn wk-lesson" data-act="lesson" data-ob="' + x.o.k + '">' + t('lessonL') + '</button></li>';
   }).join('') + '</ul>';
   var btns = [['wk-study', 'wkStudy', weakIds().length], ['wk-missed', 'wkMissed', missedIds().length], ['wk-new', 'wkNew', freshIds().length]]
     .filter(function (b) { return b[2] > 0; });
@@ -2119,6 +2322,7 @@ $('#weak').addEventListener('click', function (e) {
   var b = e.target.closest('[data-act]'); if (!b || EX || busy) return;
   var act = b.dataset.act, ids = null;
   if (act === 'guide' || act === 'guide-traps') { openGuide(act === 'guide' ? 'rules' : 'traps'); return; }
+  if (act === 'lesson' && OBJ[b.dataset.ob]) { GD.ob = b.dataset.ob; openGuide('lesson'); return; }
   if (act === 'wk-study') ids = weakIds(); else if (act === 'wk-missed') ids = missedIds(); else if (act === 'wk-new') ids = freshIds();
   if (!ids || !ids.length) return;
   startSession(ids);
@@ -2127,32 +2331,94 @@ $('#weak').addEventListener('click', function (e) {
   focusStudy();
 });
 
-/* ---- the key-rules guide: one rule per task statement, and the trap catalogue ---- */
+/* ---- the key-rules guide: rules, the trap catalogue, lessons and the exam-day review ---- */
+var SPEAK_SVG = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 6h2.4L8.5 3v10L4.9 10H2.5z"/><path d="M11 5.6a3.4 3.4 0 0 1 0 4.8M12.9 3.7a6 6 0 0 1 0 8.6"/></svg>';
+function topTraps(n) {
+  return Object.keys(A.tr).filter(function (k) { return A.tr[k][0] > 0; })
+    .sort(function (x, y) { return A.tr[y][0] - A.tr[x][0] || A.tr[y][0] / A.tr[y][1] - A.tr[x][0] / A.tr[x][1]; }).slice(0, n);
+}
+function trapList() {                                   // the focused trap, if any, comes first
+  var list = (DATA.traps || []).slice();
+  if (GD.trap) list.sort(function (x, y) { return (y.k === GD.trap) - (x.k === GD.trap); });
+  return list;
+}
+function ruleList() {
+  var weak = {}; weakObjs().forEach(function (x) { weak[x.o.k] = 1; });
+  return { weak: weak, doms: DATA.domains.map(function (d) {
+    return { d: d, list: DATA.objectives.filter(function (o) { return o.d === d.d && o.rule && (!GD.weak || weak[o.k]); }) };
+  }).filter(function (x) { return x.list.length; }) };
+}
+function lessonFacts(o) {
+  var ids = idsOf(o.k), st = null, tc = {};
+  objStats().forEach(function (x) { if (x.o.k === o.k) st = x; });
+  ids.forEach(function (id) { (BY[id].tr || []).forEach(function (k) { if (k && TRAP[k]) tc[k] = (tc[k] || 0) + 1; }); });
+  return { ids: ids, st: st, traps: Object.keys(tc).sort(function (x, y) { return tc[y] - tc[x]; }).slice(0, 3) };
+}
+function trapItems(keys) {
+  return '<ul class="ls-points">' + keys.map(function (k) { return '<li><b>' + nameHTML(TRAP[k].name) + '</b><span class="small">' + bi(TRAP[k].spot) + '</span></li>'; }).join('') + '</ul>';
+}
+function lessonHTML(o) {
+  var f = lessonFacts(o), st = f.st;
+  return '<section class="gd-lesson"><div><p class="eyebrow">' + t('lsEyebrow', { n: esc(o.n) }) + '</p><h3>' + nameHTML(o.name) + '</h3>' +
+    '<p class="small">' + (st && st.a ? t('lsScore', { pct: Math.round(100 * st.avg), a: st.a, n: f.ids.length }) : t('lsNew')) + '</p></div>' +
+    '<div class="ls-block"><p class="eyebrow">' + t('lsRule') + '</p><div class="gd-text">' + bi(o.rule) + '</div></div>' +
+    '<div class="ls-block"><p class="eyebrow">' + t('lsLearn') + '</p><ul class="ls-points">' + f.ids.map(function (id) { return '<li>' + bi(BY[id].x) + '</li>'; }).join('') + '</ul></div>' +
+    (f.traps.length ? '<div class="ls-block"><p class="eyebrow">' + t('lsTraps') + '</p>' + trapItems(f.traps) + '</div>' : '') +
+    '<div class="stack-btns"><button type="button" class="btn primary compact" data-lesson-practice="' + o.k + '">' + t('lsPractice', { n: f.ids.length }) + '</button></div></section>';
+}
+function finalHTML() {
+  var tr = topTraps(3);
+  return '<section class="gd-lesson"><p class="note">' + t('finalIntro') + '</p>' +
+    '<div class="ls-block"><p class="eyebrow">' + t('ckH') + '</p><ol class="ck-list">' + [1, 2, 3, 4, 5].map(function (i) { return '<li>' + t('ck' + i) + '</li>'; }).join('') + '</ol></div>' +
+    (tr.length ? '<div class="ls-block"><p class="eyebrow">' + t('finalTraps') + '</p>' + trapItems(tr) + '</div>' : '') +
+    '<div class="stack-btns"><button type="button" class="btn compact" data-final-rules>' + t('finalRules') + '</button></div></section>';
+}
 function guideHTML() {
-  var h = '<div class="seg gd-tabs" role="group" aria-label="' + esc(t('guideH')) + '">' +
-    '<button type="button" data-gd-tab="rules" aria-pressed="' + (GD.tab === 'rules') + '">' + t('gdRules') + '</button>' +
-    '<button type="button" data-gd-tab="traps" aria-pressed="' + (GD.tab === 'traps') + '">' + t('gdTraps') + '</button></div>';
+  var tabs = [['rules', 'gdRules'], ['traps', 'gdTraps']];
+  if (GD.ob && OBJ[GD.ob]) tabs.push(['lesson', 'lsTab']);
+  tabs.push(['final', 'finalTab']);
+  var h = '<div class="seg gd-tabs" role="group" aria-label="' + esc(t('guideH')) + '">' + tabs.map(function (x) {
+    return '<button type="button" data-gd-tab="' + x[0] + '" aria-pressed="' + (GD.tab === x[0]) + '">' + t(x[1]) + '</button>';
+  }).join('') + '</div>';
+  if (SYN) h += '<div class="gd-tools"><button type="button" class="speak" data-gd-read aria-pressed="' + (SP.src === 'guide') + '">' + SPEAK_SVG + '<span>' + t('gdRead') + '</span></button></div>';
   if (GD.tab === 'traps') {
-    return h + '<p class="note">' + t('gdTrapIntro') + '</p><ul class="gd-list traps">' + (DATA.traps || []).map(function (x) {
+    return h + '<p class="note">' + t('gdTrapIntro') + '</p><ul class="gd-list traps">' + trapList().map(function (x) {
       var s = A.tr[x.k];
-      return '<li><span class="gd-name">' + nameHTML(x.name) + '</span><div class="gd-text">' + bi(x.desc) + '</div>' +
+      return '<li' + (x.k === GD.trap ? ' class="focus"' : '') + '><span class="gd-name">' + nameHTML(x.name) + '</span><div class="gd-text">' + bi(x.desc) + '</div>' +
              '<div class="gd-spot"><span class="wn-l">' + t('gdSpot') + '</span>' + bi(x.spot) + '</div>' +
              (s && s[0] ? '<p class="small">' + t('gdFell', { f: s[0], s: s[1] }) + '</p>' : '') + '</li>';
     }).join('') + '</ul>';
   }
-  var weak = {}; weakObjs().forEach(function (x) { weak[x.o.k] = 1; });
+  if (GD.tab === 'lesson' && GD.ob && OBJ[GD.ob]) return h + lessonHTML(OBJ[GD.ob]);
+  if (GD.tab === 'final') return h + finalHTML();
+  var r = ruleList();
   h += '<p class="note">' + t('gdIntro') + '</p><label class="check" for="gd-weak"><input type="checkbox" id="gd-weak"' + (GD.weak ? ' checked' : '') + '><span>' + t('gdWeakOnly') + '</span></label>';
-  var any = false;
-  DATA.domains.forEach(function (d) {
-    var list = DATA.objectives.filter(function (o) { return o.d === d.d && o.rule && (!GD.weak || weak[o.k]); });
-    if (!list.length) return;
-    any = true;
-    h += '<section class="gd-dom"><h3><span class="num">' + d.d + '</span>' + nameHTML(d.name) + '</h3><ol class="gd-list">' + list.map(function (o) {
-      return '<li><span class="num">' + esc(o.n) + '</span><span class="gd-name">' + nameHTML(o.name) + (weak[o.k] ? '<span class="pill fail">' + t('gdWeak') + '</span>' : '') + '</span>' +
-             '<div class="gd-text">' + bi(o.rule) + '</div></li>';
+  r.doms.forEach(function (x) {
+    h += '<section class="gd-dom"><h3><span class="num">' + x.d.d + '</span>' + nameHTML(x.d.name) + '</h3><ol class="gd-list">' + x.list.map(function (o) {
+      return '<li><span class="num">' + esc(o.n) + '</span><span class="gd-name">' + nameHTML(o.name) + (r.weak[o.k] ? '<span class="pill fail">' + t('gdWeak') + '</span>' : '') + '</span>' +
+             '<div class="gd-text">' + bi(o.rule) + '</div><button type="button" class="linkbtn" data-lesson="' + o.k + '">' + t('lessonL') + '</button></li>';
     }).join('') + '</ol></section>';
   });
-  return h + (any ? '' : '<p class="note">' + t('gdWeakNone') + '</p>');
+  return h + (r.doms.length ? '' : '<p class="note">' + t('gdWeakNone') + '</p>');
+}
+function guideScript() {                                // the open tab, as text to read aloud
+  var lang = rl(), P = pr(lang), L = function (k, v) { return tt(lang, k, v); }, out = [];
+  if (GD.tab === 'traps') trapList().forEach(function (x) { out.push(P(x.name) + '. ' + P(x.desc) + ' ' + L('spSpot') + ' ' + P(x.spot)); });
+  else if (GD.tab === 'lesson' && GD.ob && OBJ[GD.ob]) {
+    var o = OBJ[GD.ob], f = lessonFacts(o);
+    out.push(L('lsEyebrow', { n: o.n }) + '. ' + P(o.name) + '.', L('spRule') + ' ' + P(o.rule), L('lsLearn') + '.');
+    f.ids.forEach(function (id) { out.push(P(BY[id].x)); });
+    if (f.traps.length) { out.push(L('lsTraps') + '.'); f.traps.forEach(function (k) { out.push(P(TRAP[k].name) + '. ' + P(TRAP[k].spot)); }); }
+  } else if (GD.tab === 'final') {
+    out.push(L('finalIntro'), L('ckH') + '.');
+    [1, 2, 3, 4, 5].forEach(function (i) { out.push(L('ck' + i)); });
+    var tr = topTraps(3);
+    if (tr.length) { out.push(L('finalTraps') + '.'); tr.forEach(function (k) { out.push(P(TRAP[k].name) + '. ' + P(TRAP[k].spot)); }); }
+  } else ruleList().doms.forEach(function (x) {
+    out.push(L('domain') + ' ' + x.d.d + '. ' + P(x.d.name) + '.');
+    x.list.forEach(function (o) { out.push(o.n + '. ' + P(o.name) + '. ' + P(o.rule)); });
+  });
+  return [{ text: out.join(' '), lang: lang }];
 }
 function renderGuide() { $('#guide').dataset.lang = S.lang; $('#guide').lang = ui(); $('#guide-body').innerHTML = guideHTML(); }
 function openGuide(tab) {
@@ -2160,15 +2426,23 @@ function openGuide(tab) {
   GD.tab = tab; GD.from = document.activeElement;
   renderGuide(); $('#guide').hidden = false; $('#guide').scrollTop = 0; lockPage(); $('#guide-sheet').focus();
 }
+function stopGuideSpeech() { if (SP.src === 'guide') stopSpeech(); }
 function closeGuide() {
+  stopGuideSpeech(); GD.trap = null;
   $('#guide').hidden = true; lockPage();
   var f = GD.from; GD.from = null;
-  if (!f || !document.contains(f)) f = $('#weak [data-act="guide"]');
+  if (!f || !document.contains(f)) f = $('#ar-cmd-in');
   if (f && f.focus) f.focus({ preventScroll: true });
 }
 $('#guide-body').addEventListener('click', function (e) {
+  if (e.target.closest('[data-gd-read]')) { if (SP.src === 'guide') stopSpeech(); else speakAll(guideScript(), 'guide'); return; }
+  var ls = e.target.closest('[data-lesson]');
+  if (ls) { stopGuideSpeech(); GD.ob = ls.dataset.lesson; GD.tab = 'lesson'; renderGuide(); $('#guide').scrollTop = 0; return; }
+  var pr_ = e.target.closest('[data-lesson-practice]');
+  if (pr_) { var ids = idsOf(pr_.dataset.lessonPractice); closeGuide(); practice(ids); return; }
+  if (e.target.closest('[data-final-rules]')) { GD.tab = 'rules'; renderGuide(); $('#guide').scrollTop = 0; speakAll(guideScript(), 'guide'); return; }
   var b = e.target.closest('[data-gd-tab]'); if (!b) return;
-  GD.tab = b.dataset.gdTab; renderGuide();
+  stopGuideSpeech(); GD.tab = b.dataset.gdTab; renderGuide();
   var nb = $('#guide-body [data-gd-tab="' + GD.tab + '"]'); if (nb) nb.focus();
 });
 $('#guide-body').addEventListener('change', function (e) {
@@ -2177,6 +2451,453 @@ $('#guide-body').addEventListener('change', function (e) {
 });
 $('#guide-close').addEventListener('click', closeGuide);
 $('#guide').addEventListener('click', function (e) { if (e.target === e.currentTarget) closeGuide(); });   // a click on the backdrop
+
+/* ---------------- A.R.C.H.I.E. ---------------- */
+/* Architect Review & Certification Helper for Interactive Exam-prep: a study assistant that runs entirely in this page, so it works on
+   GitHub Pages and offline. It plans each day from the exam date and the reader's stats, takes typed commands ("let's study 45 minutes"),
+   and reads questions, answers, rules and lessons aloud with the browser's own speech synthesis. No server and no API key. */
+var KEY_AR = KEY_S.split(':')[0] + ':archie:v1', DAY = 86400000, AR_MIN = [20, 30, 45, 60, 90, 120, 180];
+var AR = { date: null, minutes: 60, auto: false, talk: true, rate: 1, voice: { en: '', es: '' }, readLang: 'en', plan: null, day: { d: '', ans: {}, done: {} } };
+var ARV = { edit: false, vs: false };                   // view state that is not saved
+(function () {
+  var s = store.get(KEY_AR); if (!s || typeof s !== 'object') return;
+  if (typeof s.date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(s.date)) AR.date = s.date;
+  if (AR_MIN.indexOf(s.minutes) >= 0) AR.minutes = s.minutes;
+  ['auto', 'talk'].forEach(function (k) { if (typeof s[k] === 'boolean') AR[k] = s[k]; });
+  if (s.rate >= 0.7 && s.rate <= 1.5) AR.rate = +s.rate;
+  if (s.voice && typeof s.voice === 'object') ['en', 'es'].forEach(function (l) { if (typeof s.voice[l] === 'string') AR.voice[l] = s.voice[l]; });
+  if (s.readLang === 'en' || s.readLang === 'es') AR.readLang = s.readLang;
+  if (s.plan && typeof s.plan === 'object' && Array.isArray(s.plan.tasks)) AR.plan = s.plan;
+  if (s.day && typeof s.day === 'object' && typeof s.day.d === 'string')
+    AR.day = { d: s.day.d, ans: s.day.ans && typeof s.day.ans === 'object' ? s.day.ans : {}, done: s.day.done && typeof s.day.done === 'object' ? s.day.done : {} };
+})();
+function saveAR() { store.set(KEY_AR, AR); }
+
+/* ---- speech: the browser's speechSynthesis, read in short chunks so long texts are not cut off ---- */
+var SYN = window.speechSynthesis && typeof window.SpeechSynthesisUtterance === 'function' ? window.speechSynthesis : null;
+var SP = { src: null, token: 0, auto: null };
+function rl() { return S.lang === 'both' ? AR.readLang : ui(); }               // the language read aloud
+function tt(lang, k, v) { var s = T[lang][k]; if (v) Object.keys(v).forEach(function (n) { s = s.replace('{' + n + '}', v[n]); }); return s; }
+function pr(lang) { return function (pair) { return pair[lang === 'es' ? 1 : 0]; }; }
+function speechOf(s) {
+  return String(s).replace(/<[^>]+>/g, ' ').replace(/`/g, '').replace(/\$\{([A-Za-z_]+)[^}]*\}/g, '$1').replace(/_/g, ' ')
+    .replace(/\s*(→|·)\s*/g, ', ').replace(/\s+/g, ' ').trim();
+}
+function chunks(text) {
+  var out = [], buf = '';
+  function push(x) { x = x.trim(); if (x) out.push(x); }
+  text.replace(/([.!?;:])\s+/g, '$1\n').split('\n').forEach(function (s) {
+    while (s.length > 220) {
+      push(buf); buf = '';
+      var cut = s.lastIndexOf(', ', 200); if (cut < 60) cut = s.lastIndexOf(' ', 200); if (cut < 1) cut = 200;
+      push(s.slice(0, cut + 1)); s = s.slice(cut + 1).trim();
+    }
+    if (buf && (buf + ' ' + s).length > 200) { push(buf); buf = s; } else buf = buf ? buf + ' ' + s : s;
+  });
+  push(buf);
+  return out;
+}
+function allVoices() { if (!SYN) return []; try { return SYN.getVoices() || []; } catch (e) { return []; } }
+function voicesFor(lang) { return allVoices().filter(function (v) { return v.lang && v.lang.toLowerCase().indexOf(lang) === 0; }); }
+/* A.R.C.H.I.E. is a man from the US by default. Browsers do not report a voice's gender, so male and female voices are told apart by
+   their names (Windows, Edge, Chrome, Apple). A voice the reader picks always wins, in any language. */
+var MALE_VOICE = /\b(guy|andrew|brian|christopher|eric|roger|steffan|davis|tony|jason|david|mark|james|george|ryan|thomas|william|liam|daniel|arthur|oliver|alex|aaron|evan|nathan|tom|fred|reed|eddy|rocko|grandpa|ralph|alonso|jorge|pablo|raul|alvaro|gerardo|diego|juan|carlos|tomas|male|hombre|masculin\w*)\b/;
+var FEMALE_VOICE = /\b(female|mujer|femenin\w*|zira|aria|jenny|michelle|ana|emma|ava|samantha|karen|moira|tessa|helena|laura|elvira|sabina|dalia|paulina|monica|lucia|paloma|marisol|elena|google us english|google espanol\w*)\b/;
+function plainName(v) { var n = String(v.name || '').toLowerCase(); try { n = n.normalize('NFD').replace(/[̀-ͯ]/g, ''); } catch (e) { /* keep accents */ } return n; }
+function isMale(v) { var n = plainName(v); return MALE_VOICE.test(n) && !FEMALE_VOICE.test(n); }
+function isUS(v) { return /-us$/i.test(String(v.lang).replace('_', '-')); }
+function vScore(v) { return (isMale(v) ? 8 : 0) + (isUS(v) ? 4 : 0) + (/natural|neural|online|premium|enhanced/i.test(v.name) ? 2 : 0) + (v.default ? 1 : 0); }
+function voiceFor(lang) {
+  var name = AR.voice[lang];
+  if (name) { var p = allVoices().filter(function (v) { return v.name === name; })[0]; if (p) return p; }
+  var vs = voicesFor(lang);
+  return vs.length ? vs.slice().sort(function (x, y) { return vScore(y) - vScore(x); })[0] : null;
+}
+var VOICE_WAIT = { gaveUp: false };
+function withVoices(fn) {                               // Chrome fills its voice list a moment after load: wait for it (up to 3 s, once)
+  if (!SYN || allVoices().length || VOICE_WAIT.gaveUp) { fn(); return; }
+  var done = false;
+  function go() { if (done) return; done = true; if (!allVoices().length) VOICE_WAIT.gaveUp = true; fn(); }
+  try { SYN.addEventListener('voiceschanged', go, { once: true }); } catch (e) { /* older browser: the timer below still runs */ }
+  setTimeout(go, 3000);
+}
+function speakAll(parts, src) {                         // parts: [{text, lang}]; src names what is being read
+  if (!SYN) return false;
+  stopSpeech(true);
+  var list = [];
+  parts.forEach(function (p) { chunks(speechOf(p.text)).forEach(function (c) { list.push({ text: c, lang: p.lang }); }); });
+  if (!list.length) { syncSpeak(); return false; }
+  var token = SP.token;
+  SP.src = src; syncSpeak();
+  withVoices(function () {
+    if (SP.token !== token) return;                     // something else started or stopped meanwhile
+    list.forEach(function (it, i) {
+      var u = new SpeechSynthesisUtterance(it.text), v = voiceFor(it.lang);
+      u.lang = v ? v.lang : (it.lang === 'es' ? 'es-ES' : 'en-US'); if (v) u.voice = v;
+      u.rate = AR.rate;
+      if (i === list.length - 1) u.onend = u.onerror = function () { if (SP.token === token) { SP.src = null; syncSpeak(); } };
+      try { SYN.speak(u); } catch (e) { /* the browser refused to speak: stay silent */ }
+    });
+  });
+  return true;
+}
+function stopSpeech(quiet) {
+  if (!SYN) return;
+  SP.token++; SP.src = null;
+  try { SYN.cancel(); } catch (e) { /* nothing to stop */ }
+  if (!quiet) syncSpeak();
+}
+function syncSpeak() {
+  var a = $('#archie'); if (a) a.classList.toggle('speaking', !!SP.src);
+  var card = !!SP.src && /^(card|ex):/.test(SP.src), i, b = document.querySelectorAll('#card-body [data-act="read"]');
+  for (i = 0; i < b.length; i++) b[i].setAttribute('aria-pressed', String(card));
+  var g = $('#guide-body [data-gd-read]'); if (g) g.setAttribute('aria-pressed', String(SP.src === 'guide'));
+  var br = $('#archie-body [data-ar="brief"]'); if (br) br.textContent = t(SP.src === 'brief' ? 'arStop' : 'arBrief');
+}
+function speakBtn() { return SYN ? '<button type="button" class="speak" data-act="read" aria-pressed="false">' + SPEAK_SVG + '<span>' + t('arRead') + '</span><kbd>R</kbd></button>' : ''; }
+
+/* ---- reading the card: before an answer the question and options, after it the verdict, the answer and why ---- */
+function cardScript() {
+  var lang = rl(), P = pr(lang), L = function (k, v) { return tt(lang, k, v); }, c, order, revealed = false, s = [];
+  if (EX) {
+    if (EX.status !== 'run') return null;
+    c = BY[exId()]; order = EX.opt[c.id];
+    var prev = EX.at ? BY[EX.order[EX.at - 1]] : null;               // the full scenario once, when a new one starts
+    if (SCN[c.sc]) s.push(L('spScenario') + ': ' + P(SCN[c.sc].name) + '.' + (!prev || prev.sc !== c.sc ? ' ' + P(SCN[c.sc].desc) : ''));
+  } else {
+    if (!cur || cur.c.kind !== 'q') return null;
+    c = cur.c; order = cur.order; revealed = cur.revealed;
+    if (SCN[c.sc] && !revealed) s.push(L('spScenario') + ': ' + P(SCN[c.sc].name) + '.');
+  }
+  var mc = !!EX || isMc();
+  if (!revealed) {
+    s.push(L('spQuestion') + '. ' + P(c.q));
+    if (c.a.length > 1) s.push(L('spChoose2'));
+    if (mc) order.forEach(function (oi, pos) { s.push(L('spOption', { l: 'ABCDE'[pos] }) + ' ' + P(c.o[oi]) + '.'); });
+  } else {
+    if (mc && cur.correct !== null) s.push(L(cur.correct ? 'spCorrect' : 'spWrong') + (cur.correct && cur.unsure ? ' ' + L('spGuess') : ''));
+    s.push(L(c.a.length > 1 ? 'spAnswers' : 'spAnswer') + ' ' + c.a.map(function (oi) { return (mc ? 'ABCDE'[order.indexOf(oi)] + ', ' : '') + P(c.o[oi]); }).join('. ' + L('spAnd') + ' ') + '.');
+    s.push(L('spWhy') + ' ' + P(c.x));
+  }
+  return { key: (EX ? 'ex:' : 'card:') + c.id + ':' + (revealed ? 1 : 0), parts: [{ text: s.join(' '), lang: lang }] };
+}
+function readCard() {
+  var s = cardScript();
+  if (!s) { arSay(t('arNoCard')); return; }
+  if (!SYN) { arSay(t('arNoSpeech')); return; }
+  if (SP.src === s.key) { stopSpeech(); return; }
+  speakAll(s.parts, s.key);
+}
+function cardChanged() {                                // called after every render of the card
+  if (!SYN) return;
+  var s = cardScript(), key = s ? s.key : null, u = navigator.userActivation;
+  if (SP.src && /^(card|ex):/.test(SP.src) && SP.src !== key) stopSpeech(); else syncSpeak();
+  if (AR.auto && s && key !== SP.auto && (!u || u.hasBeenActive)) { SP.auto = key; speakAll(s.parts, key); }
+}
+
+/* ---- the daily plan ---- */
+function pad2(n) { return (n < 10 ? '0' : '') + n; }
+function dayKey(d) { d = d || new Date(); return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate()); }
+function midnight(key) { var p = key.split('-'); return new Date(+p[0], +p[1] - 1, +p[2]).getTime(); }
+function daysLeft() { return AR.date ? Math.round((midnight(AR.date) - midnight(dayKey())) / DAY) : null; }
+function rollDay() { var k = dayKey(); if (AR.day.d !== k) AR.day = { d: k, ans: {}, done: {} }; }
+function fmtDay(key) {
+  try { return new Date(midnight(key)).toLocaleDateString(ui() === 'es' ? 'es-CO' : 'en-US', { weekday: 'short', month: 'short', day: 'numeric' }); } catch (e) { return key; }
+}
+function durWords(min, lang) {                          // "1 hour 30 minutes", for the voice
+  min = Math.round(min); var h = Math.floor(min / 60), m = min % 60, L = function (k) { return tt(lang, k); };
+  return (h ? h + ' ' + L(h === 1 ? 'arHour' : 'arHours') : '') + (h && m ? ' ' : '') + (m || !h ? m + ' ' + L('arMinutes') : '');
+}
+function byScore(ids) {
+  return ids.slice().sort(function (x, y) { var a = cardScore(x), b = cardScore(y); return (a === null ? GUESS : a) - (b === null ? GUESS : b); });
+}
+/* Today's plan, from the days left, the daily study time and the stats:
+   a full simulation on scheduled days (a baseline, then every 4 days, and 2 days before the exam); questions split between what was
+   missed or guessed, the weakest task statements and new questions, paced so that every question is seen before the exam;
+   the key rules in the last 3 days; a light review the day before; the checklist on the day. */
+function planFor() {
+  var dl = daysLeft(), spc = secPerCard(), q = Math.max(5, Math.floor(AR.minutes * 60 / spc)), tasks = [], used = {};
+  var plan = { day: dayKey(), dl: dl, date: AR.date, min: AR.minutes, tasks: tasks };
+  if (dl !== null && dl < 0) return plan;
+  var trap = topTraps(1)[0];
+  if (dl === 0) { tasks.push({ k: 'final' }, { k: 'rules' }); if (trap) tasks.push({ k: 'trap', trap: trap }); return plan; }
+  function take(list, n) { var out = []; for (var i = 0; i < list.length && out.length < n; i++) if (!used[list[i]]) { used[list[i]] = 1; out.push(list[i]); } return out; }
+  var hist = exHist(), since = hist.length ? (Date.now() - hist[hist.length - 1].t) / DAY : Infinity;
+  var due = dl === null ? !hist.length : dl >= 2 && (!hist.length || since >= 4 || (dl === 2 && since >= 1));
+  if (due && (AR.minutes >= EXAM_MIN || dl === 2 || (dl !== null && dl <= 4 && !hist.length))) { tasks.push({ k: 'sim' }); q -= Math.round(EXAM_MIN * 60 / spc); }
+  if (q > 0) {
+    var review = take(byScore(missedIds()), dl === 1 ? Math.min(15, q) : Math.ceil(q * 0.35));
+    if (review.length) tasks.push({ k: 'review', ids: review });
+    if (dl !== 1) {
+      var wo = weakObjs().slice(0, 3), weak = take(byScore([].concat.apply([], wo.map(function (x) { return x.ids; }))), Math.ceil(q * 0.35));
+      if (weak.length) tasks.push({ k: 'weak', ids: weak, obs: wo.map(function (x) { return x.o.k; }) });
+      var seen = {}; QIDS.forEach(function (id) { if (A.q[id]) seen[BY[id].ob] = (seen[BY[id].ob] || 0) + 1; });
+      var fresh = shuffle(freshIds()).sort(function (x, y) { return (seen[BY[x].ob] || 0) - (seen[BY[y].ob] || 0); });   // untouched task statements first
+      var need = dl ? Math.ceil(fresh.length / Math.max(1, dl - 1)) : 0, left = q - review.length - weak.length;
+      var nw = take(fresh, Math.max(left, Math.min(need, Math.ceil(q / 2))));
+      if (nw.length) tasks.push({ k: 'new', ids: nw });
+      if (!review.length && !weak.length && !nw.length) { var mix = take(byScore(QIDS), q); if (mix.length) tasks.push({ k: 'mix', ids: mix }); }
+    }
+  }
+  if (trap && dl !== 1) tasks.push({ k: 'trap', trap: trap });
+  if (dl !== null && dl <= 3) tasks.push({ k: 'rules' });
+  return plan;
+}
+var AR_TASKS = { sim: 1, weak: 1, review: 1, 'new': 1, mix: 1, trap: 1, rules: 1, final: 1 };
+function currentPlan() {                                // one plan per day, rebuilt when the date or the study time changes
+  rollDay();
+  var p = AR.plan;
+  if (!p || p.day !== dayKey() || p.date !== AR.date || p.min !== AR.minutes || !Array.isArray(p.tasks)) { AR.plan = p = planFor(); saveAR(); }
+  p.tasks = p.tasks.filter(function (tk) {
+    if (!tk || !AR_TASKS[tk.k] || (tk.k === 'trap' && !TRAP[tk.trap])) return false;
+    if (tk.ids) { tk.ids = tk.ids.filter(function (id) { return BY[id] && BY[id].kind === 'q'; }); return tk.ids.length > 0; }
+    return true;
+  });
+  return p;
+}
+function taskInfo(tk) {
+  var spc = secPerCard();
+  if (tk.ids) {
+    var n = tk.ids.length, d = tk.ids.filter(function (id) { return AR.day.ans[id]; }).length;
+    var title = tk.k === 'weak' ? t('arWeak', { list: (tk.obs || []).map(function (k) { return OBJ[k] ? OBJ[k].n : ''; }).join(', ') })
+              : t(tk.k === 'review' ? 'arReview' : tk.k === 'new' ? 'arNew' : 'arMix');
+    return { title: title, meta: t('arQM', { n: n, m: fmtDur(Math.max(1, n * spc / 60)), d: d }), done: d >= n, btn: t(d >= n ? 'arAgain' : d ? 'arGo' : 'arStart'), min: n * spc / 60 };
+  }
+  if (tk.k === 'sim') {
+    var sd = exHist().some(function (x) { return x.t >= midnight(dayKey()); });
+    return { title: t('arSim'), meta: t('arSimM', { m: fmtDur(EXAM_MIN) }), done: sd, btn: t(sd ? 'arAgain' : 'arStart'), min: EXAM_MIN };
+  }
+  if (tk.k === 'trap') return { title: t('arTrap', { name: esc(one(TRAP[tk.trap].name)) }), meta: t('arTrapM'), done: !!AR.day.done.trap, btn: t('arOpen'), min: 3 };
+  if (tk.k === 'rules') return { title: t('arRules'), meta: t('arRulesM'), done: !!AR.day.done.rules, btn: t(SYN ? 'arListen' : 'arOpen'), min: 10 };
+  return { title: t('arFinal'), meta: t('arFinalM'), done: !!AR.day.done.final, btn: t('arOpen'), min: 5 };
+}
+function briefing(plan, lang, spoken) {
+  var L = function (k, v) { return tt(lang, k, v); }, P = pr(lang), hr = new Date().getHours(), dl = plan.dl;
+  var s = [L(hr < 12 ? 'arMorning' : hr < 19 ? 'arAfternoon' : 'arEvening')];
+  s.push(dl === null ? L('arNoDate') : dl < 0 ? L('arPast') : dl === 0 ? L('arToday') : dl === 1 ? L('arTomorrow') : L('arDays', { n: dl }));
+  var r = readiness();
+  s.push(!r.a ? L('arMeasure') : L(r.score >= EXAM_PASS ? 'arAbove' : 'arBelow', { s: r.score, p: EXAM_PASS, g: EXAM_PASS - r.score }));
+  if (plan.tasks.length) {
+    var m = 0, open = 0;
+    plan.tasks.forEach(function (tk) { var x = taskInfo(tk); m += x.min; if (!x.done) open++; });
+    s.push(open ? L(plan.tasks.length === 1 ? 'arPlanSum1' : 'arPlanSum', { n: plan.tasks.length, m: spoken ? durWords(m, lang) : fmtDur(m) }) : L('arPlanDone'));
+  }
+  var wo = weakObjs().slice(0, 2);
+  if (wo.length && dl !== 0) s.push(L('arFocus', { list: wo.map(function (x) { return x.o.n + ' ' + P(x.o.name); }).join(L('arAnd')) }));
+  return s.join(' ');
+}
+function speakBrief() {
+  if (SP.src === 'brief') { stopSpeech(); return; }
+  if (!SYN) { arSay(t('arNoSpeech')); return; }
+  var lang = rl(); speakAll([{ text: briefing(currentPlan(), lang, true), lang: lang }], 'brief');
+}
+
+/* ---- the panel ---- */
+function langName(lang) { return t(lang === 'es' ? 'arLangEs' : 'arLangEn'); }
+function voiceNowHTML() {                               // the voice in use, always visible, with a way to change it
+  if (!SYN) return '';
+  var lang = rl(), v = voiceFor(lang);
+  if (!allVoices().length) return '<p class="ar-meta">' + t('arVoiceLoading') + '</p>';
+  if (!v) return '<p class="ar-meta">' + t('arNoVoice') + '<button type="button" class="linkbtn" data-ar="voice">' + t('arVoiceChange') + '</button></p>';
+  return '<p class="ar-meta ar-voice-now">' + SPEAK_SVG + '<span>' + t('arVoiceNow', { v: esc(v.name) }) +
+    (!AR.voice[lang] && !isMale(v) ? ' ' + t('arNoMaleShort', { l: langName(lang) }) : '') + '</span>' +
+    '<button type="button" class="linkbtn" data-ar="voice">' + t('arVoiceChange') + '</button></p>';
+}
+function voiceHTML() {
+  if (!SYN) return '<p class="note">' + t('arNoSpeech') + '</p>';
+  var lang = rl(), all = allVoices(), chosen = AR.voice[lang] || '', v = voiceFor(lang);
+  function mine(x) { return String(x.lang).toLowerCase().indexOf(lang) === 0; }
+  function order(a, b) { return (mine(b) - mine(a)) || (isUS(b) - isUS(a)) || String(a.name).localeCompare(String(b.name)); }
+  function opt(x) { return '<option value="' + esc(x.name) + '"' + (x.name === chosen ? ' selected' : '') + '>' + esc(x.name) + ' · ' + esc(x.lang) + '</option>'; }
+  function group(label, list) { return list.length ? '<optgroup label="' + esc(label) + '">' + list.sort(order).map(opt).join('') + '</optgroup>' : ''; }
+  var male = all.filter(isMale), sameLang = all.filter(function (x) { return !isMale(x) && mine(x); }), rest = all.filter(function (x) { return !isMale(x) && !mine(x); });
+  return '<details class="ar-voice" id="ar-voice"' + (ARV.vs ? ' open' : '') + '><summary>' + t('arVoiceH') + '</summary>' +
+    '<label class="ar-field">' + t('arVoiceFor', { l: langName(lang) }) + '<select id="ar-voice-sel"><option value="">' + t('arVoiceAuto') + '</option>' +
+      group(t('arMaleGroup'), male) + group(t('arLangGroup', { l: langName(lang) }), sameLang) + group(t('arOtherGroup'), rest) + '</select></label>' +
+    (!all.length ? '<p class="note">' + t('arVoiceLoading') + '</p>' : v && !chosen && !isMale(v) ? '<p class="note">' + t('arNoMale', { l: langName(lang) }) + '</p>' : '') +
+    '<button type="button" class="btn compact" data-ar="test">' + t('arTest') + '</button>' +
+    '<label class="check" for="ar-auto"><input type="checkbox" id="ar-auto"' + (AR.auto ? ' checked' : '') + '><span>' + t('arAuto') + '</span></label>' +
+    '<label class="check" for="ar-talk"><input type="checkbox" id="ar-talk"' + (AR.talk ? ' checked' : '') + '><span>' + t('arTalk') + '</span></label>' +
+    '<label class="ar-field"><span id="ar-rate-l">' + t('arRate', { r: AR.rate.toFixed(1) }) + '</span><input type="range" id="ar-rate" min="0.7" max="1.5" step="0.1" value="' + AR.rate + '"></label>' +
+    (S.lang === 'both' ? '<label class="ar-field">' + t('arReadLang') + '<select id="ar-readlang"><option value="en"' + (AR.readLang === 'en' ? ' selected' : '') + '>English</option>' +
+      '<option value="es"' + (AR.readLang === 'es' ? ' selected' : '') + '>Español</option></select></label>' : '') +
+    '</details>';
+}
+function renderArchie(force) {
+  var el = $('#archie-body'); if (!el) return;
+  if (force && el.contains(document.activeElement)) document.activeElement.blur();
+  var inp = $('#ar-cmd-in'); inp.placeholder = t('arCmdPh'); inp.setAttribute('aria-label', t('arCmdL')); $('#ar-cmd-go').textContent = t('arGoBtn');
+  $('#ar-chips').innerHTML = t('arChips').split('|').map(function (c) { return '<button type="button" data-cmd="' + esc(c) + '">' + esc(c) + '</button>'; }).join('');
+  var f = document.activeElement;
+  if (!force && f && el.contains(f) && /^(INPUT|SELECT)$/.test(f.tagName)) return;   // do not rebuild a form the reader is using
+  var plan = currentPlan(), dl = plan.dl, h = '<p class="ar-say">' + esc(briefing(plan, ui(), false)) + '</p>';
+  if (!AR.date || ARV.edit) {
+    h += '<div class="ar-row"><label class="ar-field">' + t('arDateL') + '<input type="date" id="ar-date" min="' + dayKey() + '" value="' + (AR.date || '') + '"></label>' +
+      '<label class="ar-field">' + t('arMinL') + '<select id="ar-min">' + AR_MIN.map(function (m) { return '<option value="' + m + '"' + (m === AR.minutes ? ' selected' : '') + '>' + fmtDur(m) + '</option>'; }).join('') + '</select></label>' +
+      '<button type="button" class="btn primary" data-ar="save">' + t('arSave') + '</button>' + (AR.date ? '<button type="button" class="btn" data-ar="cancel">' + t('cancel') + '</button>' : '') + '</div>';
+  } else h += '<p class="ar-meta">' + t('arExamOn', { d: esc(fmtDay(AR.date)), m: fmtDur(AR.minutes) }) + '<button type="button" class="linkbtn" data-ar="edit">' + t('arChange') + '</button></p>';
+  h += '<p class="eyebrow">' + t('arTodayH') + '</p>';
+  if (!plan.tasks.length) h += '<p class="note">' + t(dl !== null && dl < 0 ? 'arPastNote' : 'arNothing') + '</p>';
+  else {
+    var first = true;
+    h += '<ul class="ar-tasks">' + plan.tasks.map(function (tk, i) {
+      var x = taskInfo(tk), lead = !x.done && first; if (lead) first = false;
+      return '<li' + (x.done ? ' class="done"' : '') + '><span class="ar-t">' + (x.done ? '<span class="ok" aria-hidden="true">✓</span>' : '') + x.title + '</span>' +
+             '<span class="ar-m">' + x.meta + '</span><button type="button" class="btn' + (lead ? ' primary' : '') + '" data-ar="task" data-i="' + i + '">' + x.btn + '</button></li>';
+    }).join('') + '</ul>';
+  }
+  h += voiceNowHTML();
+  h += '<div class="ar-links">' + (SYN ? '<button type="button" class="linkbtn" data-ar="brief">' + t(SP.src === 'brief' ? 'arStop' : 'arBrief') + '</button>' : '') +
+       '<button type="button" class="linkbtn" data-ar="final">' + t('arFinalLink') + '</button><button type="button" class="linkbtn" data-ar="rebuild">' + t('arRebuild') + '</button></div>';
+  el.innerHTML = h + voiceHTML();
+}
+function arSay(text, silent) {                          // A.R.C.H.I.E.'s reply, on screen and (if wanted) aloud
+  var el = $('#ar-reply'); el.textContent = text || ''; el.hidden = !text;
+  if (text && !silent && AR.talk && SYN) speakAll([{ text: text, lang: ui() }], 'reply');
+}
+function practice(ids) {                                // a multiple-choice session over these questions
+  if (EX || !ids || !ids.length) return;
+  if (S.mode !== 'mc') { S.mode = 'mc'; saveSettings(); applyText(); }
+  startSession(ids.slice());
+  var top = $('#card-wrap').getBoundingClientRect().top;
+  if (top < 0 || top > window.innerHeight * 0.6) $('#card-wrap').scrollIntoView({ block: 'start' });
+  focusStudy();
+}
+function runTask(tk) {
+  if (EX || busy) return;
+  if (tk.k === 'sim') { openExam(); return; }
+  if (tk.k === 'rules') { AR.day.done.rules = 1; saveAR(); renderArchie(); openGuide('rules'); speakAll(guideScript(), 'guide'); return; }
+  if (tk.k === 'trap') { AR.day.done.trap = 1; saveAR(); renderArchie(); GD.trap = tk.trap; openGuide('traps'); return; }
+  if (tk.k === 'final') { AR.day.done.final = 1; saveAR(); renderArchie(); openGuide('final'); return; }
+  var open = tk.ids.filter(function (id) { return !AR.day.ans[id]; });
+  practice(open.length ? open : tk.ids);
+}
+
+/* ---- commands: "Archie, let's study 45 minutes" ---- */
+function norm(s) {
+  s = String(s || '').toLowerCase();
+  try { s = s.normalize('NFD').replace(/[̀-ͯ]/g, ''); } catch (e) { /* old browser: keep accents */ }
+  return ' ' + s.replace(/a\.r\.c\.h\.i\.e\.?|\barchie\b/g, ' ').replace(/[¡!¿?;"“”]+/g, ' ').replace(/\s+/g, ' ').trim() + ' ';
+}
+var NUMW = [['cuarenta y cinco', 45], ['forty five', 45], ['forty-five', 45], ['twenty five', 25], ['twenty-five', 25], ['veinticinco', 25],
+  ['ninety', 90], ['noventa', 90], ['sixty', 60], ['sesenta', 60], ['fifty', 50], ['cincuenta', 50], ['forty', 40], ['cuarenta', 40],
+  ['thirty', 30], ['treinta', 30], ['twenty', 20], ['veinte', 20], ['fifteen', 15], ['quince', 15], ['ten', 10], ['diez', 10],
+  ['five', 5], ['cinco', 5], ['four', 4], ['cuatro', 4], ['three', 3], ['tres', 3], ['two', 2], ['dos', 2],
+  ['one', 1], ['uno', 1]];
+var UNIT_RE = /(\d+(?:[.,]\d+)?)\s*(pomodoros?|hours?|hrs?|horas?|h|minutes?|mins?|minutos?|m)\b/g;
+function parseMinutes(s) {                              // minutes named in a command, or null if none
+  s = ' ' + s + ' ';
+  s = s.replace(/\b(half an hour|half hour|media hora)\b/g, ' 30 min ')
+       .replace(/\b(a )?quarter (of an )?hour\b|\b(un )?cuarto de hora\b/g, ' 15 min ')
+       .replace(/\b(and a half|y media|y medio)\b/g, ' and_half ')
+       .replace(/\b(an?|una?)\s+(hours?|horas?|pomodoros?|minutes?|minutos?)\b/g, ' 1 $2');   // "an hour", "una hora", but not "a while"
+  NUMW.forEach(function (w) { s = s.replace(new RegExp('\\b' + w[0] + '\\b', 'g'), ' ' + w[1] + ' '); });
+  s = s.replace(/(\d+)\s*and_half\s*(hours?|horas?)/g, '$1.5 $2')             // "one and a half hours"
+       .replace(/(^|[^\d\s])(\s+)(hours?|horas?)\b/g, '$1$2 1 $3')             // "hora y media": an hour with no number is one hour
+       .replace(/(hours?|horas?)\s*and_half/g, '$1 30 min')                     // "an hour and a half"
+       .replace(/(\d+)\s*[:h]\s*(\d{2})\b/g, '$1 hours $2 min');                // "1:30", "1h30"
+  var total = 0, found = false, m;
+  UNIT_RE.lastIndex = 0;
+  while ((m = UNIT_RE.exec(s))) {
+    var v = parseFloat(m[1].replace(',', '.')), u = m[2];
+    total += /^pomo/.test(u) ? v * ((S.timer.focus || 25) + (S.timer.brk || 5)) : /^h/.test(u) ? v * 60 : v; found = true;
+  }
+  if (!found) { var b = s.match(/\b(\d+(?:[.,]\d+)?)\b/); if (b) { var n = parseFloat(b[1].replace(',', '.')); total = n <= 4 ? n * 60 : n; found = true; } }   // a bare 2 means hours, a bare 45 minutes
+  return found && total > 0 ? Math.max(5, Math.min(600, Math.round(total))) : null;
+}
+function objByNum(n) { return DATA.objectives.filter(function (o) { return o.n === n; })[0] || null; }
+function studyQueue(n) {                                // today's plan first, then what was missed, the weakest, the unseen, the lowest scores
+  var plan = currentPlan(), out = [], seen = {};
+  function add(list) { list.forEach(function (id) { if (out.length < n && !seen[id] && BY[id]) { seen[id] = 1; out.push(id); } }); }
+  plan.tasks.forEach(function (tk) { if (tk.ids) add(tk.ids.filter(function (id) { return !AR.day.ans[id]; })); });
+  add(missedIds()); add(weakIds()); add(freshIds()); add(byScore(QIDS));
+  return out;
+}
+function studyFor(min, why) {                           // start the Pomodoro timer and a session sized to the time
+  if (EX) return;
+  min = Math.max(5, Math.min(600, Math.round(min)));
+  var focus = Math.min(S.timer.focus > 0 ? S.timer.focus : 25, min), brk = S.timer.brk > 0 ? S.timer.brk : 5;
+  var c = { total: min, focus: focus, brk: brk, pomo: true, sound: S.timer.sound !== false };
+  S.timer = { total: min, focus: S.timer.focus > 0 ? S.timer.focus : 25, brk: brk, pomo: true, sound: c.sound }; saveSettings();   // a short session never shortens the focus preference
+  if (TM) endTimer(false);
+  startTimer(c);
+  var pl = planOf(min * 60, focus * 60, brk * 60, true), ids = studyQueue(Math.max(3, Math.round(pl.focus / secPerCard())));
+  practice(ids);
+  var msg = (why === 'time' ? t('arNoTime') + ' ' : why === 'cmd' ? t('arDidntGet') + ' ' : '') +
+            t(pl.blocks > 1 ? 'arStudyGo' : 'arStudyGo1', { t: fmtDur(min), b: pl.blocks, f: focus, k: brk, n: ids.length });
+  arSay(msg, true);
+  if (SYN && AR.talk) {                                 // say it, then read the first question if auto-read is on
+    var parts = [{ text: msg, lang: ui() }], s = AR.auto ? cardScript() : null;
+    if (s) { SP.auto = s.key; parts = parts.concat(s.parts); }
+    speakAll(parts, s ? s.key : 'reply');
+  }
+}
+function runCommand(raw) {
+  var s = norm(raw);
+  if (!s.trim() || EX) return;
+  function has(re) { return re.test(s); }
+  if (has(/\b(help|ayuda|commands|comandos|what can you do|que puedes)\b/)) { arSay(t('arHelp')); return; }
+  if (/^\s*(stop|para|parar|deten\w*|alto|silencio|silence|quiet|callate|shh)\b/.test(s)) {
+    if (TM && has(/\b(timer|temporizador|session|sesion|study\w*|estudi\w*|pomodoro)\b/)) { endTimer(false); stopSpeech(); arSay(t('arTimerStop')); return; }
+    stopSpeech(); arSay(t('arStopOk'), true); return;
+  }
+  var unit = /\d\s*(pomodoros?|hours?|hrs?|horas?|h|minutes?|mins?|minutos?|m)\b|\b(hour|hora|media|half|quarter|cuarto)\b/;
+  var num = s.match(/\b(\d)\s*[.,]\s*(\d)\b/);
+  if (has(/\b(lesson|leccion|teach|ensena\w*|explain|explica\w*)\b/) || (num && !unit.test(s))) {
+    var o = num ? objByNum(num[1] + '.' + num[2]) : null;
+    if (o) { GD.ob = o.k; openGuide('lesson'); arSay(t('arLessonOk', { n: o.n, name: one(o.name) })); } else arSay(t('arLessonNo'));
+    return;
+  }
+  var mins = parseMinutes(s);
+  if (has(/\b(stud\w*|estudi\w*|practic\w*|repas\w*|quiz\w*|drill\w*|pomodoro\w*)\b/) || (mins !== null && unit.test(s))) { studyFor(mins === null ? 30 : mins, mins === null ? 'time' : null); return; }
+  if (has(/\b(rules?|reglas?)\b/)) { AR.day.done.rules = 1; saveAR(); renderArchie(); openGuide('rules'); arSay(t('arRulesOk'), true); speakAll(guideScript(), 'guide'); return; }
+  if (has(/\b(traps?|trampas?)\b/)) { openGuide('traps'); arSay(t('arTrapsOk')); return; }
+  if (has(/\b(exam\w*|simula\w*)\b/)) { openExam(); arSay(t('arExamOk')); return; }
+  if (has(/\b(read|lee|leer|leeme|repeat|repite)\b/)) { arSay('', true); readCard(); return; }
+  if (has(/\b(plan|brief\w*|today|hoy|resumen|status|estado|how am i|como voy)\b/)) { arSay(t('arPlanOk'), true); speakBrief(); return; }
+  studyFor(30, 'cmd');                                  // not understood: a 30-minute session, as agreed
+}
+
+$('#ar-cmd').addEventListener('submit', function (e) { e.preventDefault(); var i = $('#ar-cmd-in'), v = i.value; i.value = ''; runCommand(v); });
+$('#archie').addEventListener('click', function (e) {
+  var c = e.target.closest('[data-cmd]'); if (c) { runCommand(c.dataset.cmd); return; }
+  var b = e.target.closest('[data-ar]'); if (!b || EX) return;
+  var act = b.dataset.ar;
+  if (act === 'save') {
+    var d = $('#ar-date').value, m = +$('#ar-min').value;
+    AR.date = /^\d{4}-\d{2}-\d{2}$/.test(d) ? d : null; if (AR_MIN.indexOf(m) >= 0) AR.minutes = m;
+    ARV.edit = false; AR.plan = null; saveAR(); renderArchie(true);
+    var nb = $('#archie-body [data-ar="task"]') || $('#archie-body [data-ar="edit"]'); if (nb) nb.focus();
+  } else if (act === 'edit') { ARV.edit = true; renderArchie(true); var di = $('#ar-date'); if (di) di.focus(); }
+  else if (act === 'cancel') { ARV.edit = false; renderArchie(true); }
+  else if (act === 'task') { var tk = currentPlan().tasks[+b.dataset.i]; if (tk) runTask(tk); }
+  else if (act === 'brief') speakBrief();
+  else if (act === 'rebuild') { AR.plan = planFor(); saveAR(); renderArchie(true); }
+  else if (act === 'final') { AR.day.done.final = 1; saveAR(); openGuide('final'); }
+  else if (act === 'test') speakAll([{ text: tt(rl(), 'arTestLine'), lang: rl() }], 'test');
+  else if (act === 'voice') { ARV.vs = true; renderArchie(true); var vsel = $('#ar-voice-sel'); if (vsel) { vsel.scrollIntoView({ block: 'center' }); vsel.focus(); } }
+});
+$('#archie').addEventListener('change', function (e) {
+  var id = e.target.id;
+  if (id === 'ar-auto') AR.auto = e.target.checked;
+  else if (id === 'ar-talk') AR.talk = e.target.checked;
+  else if (id === 'ar-voice-sel') {                    // pick, save, redraw and let the reader hear it
+    AR.voice[rl()] = e.target.value; saveAR(); renderArchie(true);
+    var s2 = $('#ar-voice-sel'); if (s2) s2.focus();
+    speakAll([{ text: tt(rl(), 'arTestLine'), lang: rl() }], 'test'); return;
+  }
+  else if (id === 'ar-readlang') { AR.readLang = e.target.value === 'es' ? 'es' : 'en'; saveAR(); renderArchie(true); var r = $('#ar-readlang'); if (r) r.focus(); return; }
+  else return;
+  saveAR();
+});
+$('#archie').addEventListener('input', function (e) {
+  if (e.target.id !== 'ar-rate') return;
+  AR.rate = Math.min(1.5, Math.max(0.7, +e.target.value || 1)); saveAR();
+  $('#ar-rate-l').textContent = t('arRate', { r: AR.rate.toFixed(1) });
+});
+$('#archie').addEventListener('toggle', function (e) { if (e.target.id === 'ar-voice') ARV.vs = e.target.open; }, true);
+$('#ar-jump').addEventListener('click', function (e) { e.preventDefault(); $('#archie').scrollIntoView({ block: 'start' }); $('#ar-cmd-in').focus({ preventScroll: true }); });
+if (SYN) { try { SYN.addEventListener('voiceschanged', function () { renderArchie(); }); } catch (e) { SYN.onvoiceschanged = function () { renderArchie(); }; } }
 
 /* ---------------- start ---------------- */
 if (DATA.variant) $('#source').parentNode.hidden = true;      // a short version has one source of cards, so the source filter has nothing to offer

@@ -31,6 +31,7 @@ and start studying.
 - [Question bank](#question-bank)
 - [Study modes](#study-modes)
 - [Exam simulation](#exam-simulation)
+- [A.R.C.H.I.E.](#archie)
 - [Weak spots](#weak-spots)
 - [Traps and key rules](#traps-and-key-rules)
 - [Study timer](#study-timer)
@@ -53,6 +54,7 @@ and start studying.
 | Not sure | Mark a guess before you answer; a lucky right answer still counts as weak |
 | Traps | Every wrong option is tagged with one of 12 distractor patterns, and the page tracks which ones catch you |
 | Key rules | A last-minute review sheet: one rule per task statement (30) plus the trap guide |
+| A.R.C.H.I.E. | A study assistant: a daily plan to your exam date, commands such as "let's study 45 minutes", questions read aloud, lessons |
 | Decks | One deck per task statement (30), grouped under the 5 exam domains |
 | Diagrams | 60 inline SVG diagrams explain the answers to questions 1–60, and you can enlarge them |
 | Study timer | Plan a session (120 minutes by default) with optional Pomodoro breaks and an estimate of how many cards fit |
@@ -193,6 +195,64 @@ the decks panel, and you can clear them without losing study progress.
 Every exam answer also feeds the weak-spots panel. A question you flagged
 and got right counts as a guess.
 
+## A.R.C.H.I.E.
+
+**A.R.C.H.I.E.** (*Architect Review & Certification Helper for Interactive
+Exam-prep*) is a study assistant built into the page. It runs entirely in
+the browser, so it works on GitHub Pages and offline, with no server, no
+API key and no microphone. You type to it, it reads to you, and you pick
+the answers on screen.
+
+**Commands.** Type in the box at the top of the panel, or tap a
+suggestion:
+
+| You type | A.R.C.H.I.E. does |
+|---|---|
+| `Archie, let's study 45 minutes` | Starts the study timer with Pomodoro breaks and queues as many questions as fit, starting with today's plan |
+| `an hour and a half`, `1h30`, `2 pomodoros`, `estudiemos media hora` | Understands times in English and Spanish, in digits or words |
+| `let's study` (no time) or anything it doesn't understand | Starts a **30-minute** session and says so |
+| `read the question` | Reads the scenario, question and options |
+| `stop` / `para`, `stop the timer` | Stops reading, or ends the timer |
+| `lesson 1.5` | Opens the lesson for that task statement |
+| `key rules`, `traps`, `exam`, `today's plan`, `help` | Reads the rules aloud, opens the trap guide, opens the exam, reads your briefing, lists commands |
+
+**Daily plan.** Set your exam date and daily study time, and A.R.C.H.I.E.
+plans each day:
+
+- a full exam simulation on scheduled days: a baseline, then every four
+  days, and two days before the exam;
+- questions split between what you missed or guessed, your weakest task
+  statements, and new questions, paced so you see all 120 before the exam;
+- the key rules read aloud in the last three days, a light review the day
+  before, and an exam-day checklist on the day.
+
+Each task shows its progress and starts with one click. The plan is fixed
+for the day; **Rebuild today's plan** recomputes it.
+
+**Reading aloud.** **Read aloud** on every card (or `R`) reads the
+question and options. After you answer, it reads the verdict, the correct
+answer and why. In the exam it reads only the question.
+
+**Voice.** The panel always shows the voice in use, with a **Change
+voice** link. The menu lists every voice on your device, male voices
+first, and you can pick any of them for each reading language, even an
+English voice for Spanish text. The choice is saved. By default A.R.C.H.I.E.
+is a **US-English man** (and a US-Spanish man in Spanish). Browsers don't
+report a voice's gender, so it finds male voices by name, for example
+*Microsoft Guy* or *David* on Windows and *Alex* on a Mac. If your device
+has no male voice for a language, the panel says so, uses the best voice
+available, and explains how to add voices. Under **Voice and reading** you
+can also turn on automatic reading of every card and change the speed.
+
+**Lessons and exam day.** A lesson gathers one task statement's key
+rule, what its questions teach and the traps that appear there, then lets
+you practice those questions. **Exam-day review** has a five-point
+checklist and your top traps, and can read them aloud.
+
+Speech uses the browser's built-in Web Speech API, available in Chrome,
+Edge, Safari and Firefox. Where it isn't available, A.R.C.H.I.E. works in
+text only.
+
 ## Weak spots
 
 The **Weak spots** panel in the decks column collects every answer you
@@ -272,6 +332,7 @@ from 5 to 600 minutes. It defaults to 120 minutes, the length of the exam.
 | `ccarf:exam:v1` | An exam in progress, so it survives a reload |
 | `ccarf:attempts:v1` | Your past exam attempts and their scores |
 | `ccarf:answers:v1` | Weak-spot stats: the last 3 results per question and how often each trap caught you |
+| `ccarf:archie:v1` | A.R.C.H.I.E.: exam date, daily time, voice settings, today's plan and what you answered today |
 
 When the page is published as a **Claude Artifact**, it also saves progress
 to your Claude account through `window.claude` and merges it with the
@@ -291,6 +352,7 @@ card. The levels are erased in the account too.
 | Study | `2` | Got it |
 | Study / Exam | `A`, `B`, `C`… | Pick an option |
 | Multiple choice | `U` | Mark that you're not sure |
+| Study / Exam | `R` | Read the card aloud (again to stop) |
 | Exam | `Shift` + `A`, `B`, `C`… | Strike out an option |
 | Exam | `←` `→` | Previous / next question |
 | Exam | `F` | Flag the question |
