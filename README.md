@@ -46,7 +46,7 @@ and start studying.
 |---|---|
 | Flashcards | Answer in your head, turn the card, then grade yourself **Again** or **Got it** |
 | Multiple choice | Pick an option and get an explanation for the right answer and every wrong one |
-| Exam simulation | 60 questions, 120 minutes, grouped by scenario, no feedback until you submit, estimated score out of 1,000 |
+| Exam simulation | 60 questions drawn from the 120 in the exam's proportions, 120 minutes, grouped by scenario, no feedback until you submit, estimated score out of 1,000 |
 | Scenarios | Every question is set in one of the 6 exam scenarios, shown before the question as on the exam |
 | Mastery tracking | Every card moves through New → Learning → Familiar → Mastered |
 | Weak spots | Accuracy per task statement, an estimated readiness score, and one-click sessions for your weakest areas |
@@ -54,7 +54,7 @@ and start studying.
 | Traps | Every wrong option is tagged with one of 12 distractor patterns, and the page tracks which ones catch you |
 | Key rules | A last-minute review sheet: one rule per task statement (30) plus the trap guide |
 | Decks | One deck per task statement (30), grouped under the 5 exam domains |
-| Diagrams | 60 inline SVG diagrams explain the answers, and you can enlarge them |
+| Diagrams | 60 inline SVG diagrams explain the answers to questions 1–60, and you can enlarge them |
 | Study timer | Plan a session (120 minutes by default) with optional Pomodoro breaks and an estimate of how many cards fit |
 | Languages | English, Spanish, or both side by side (`EN + ES`) |
 | Themes | Auto (follows the system), Light, or Dark |
@@ -106,34 +106,37 @@ docs/index.html
 
 ## Question bank
 
-The bank holds **60 questions**, the length of the real exam. The exam
-guide (version 1.0) weights the 5 domains and lists 30 task statements
-without weights, so each domain's count is rounded from its weight, with
-at least one question per task statement.
+The bank holds **120 questions**, twice the length of the real exam. The
+exam guide (version 1.0) weights the 5 domains and lists 30 task
+statements without weights, so each domain's count is rounded from its
+weight. Every task statement has twice its exam share, so each one has at
+least two questions and each exam attempt can draw a fresh set.
 
-| # | Domain | Weight | Task statements | Questions |
-|---|---|---|---|---|
-| 1 | Agentic Architecture & Orchestration | 27% | 7 | 16 |
-| 2 | Tool Design & MCP Integration | 18% | 5 | 11 |
-| 3 | Claude Code Configuration & Workflows | 20% | 6 | 12 |
-| 4 | Prompt Engineering & Structured Output | 20% | 6 | 12 |
-| 5 | Context Management & Reliability | 15% | 6 | 9 |
-| | **Total** | **100%** | **30** | **60** |
+| # | Domain | Weight | Task statements | Bank | Per exam |
+|---|---|---|---|---|---|
+| 1 | Agentic Architecture & Orchestration | 27% | 7 | 32 | 16 |
+| 2 | Tool Design & MCP Integration | 18% | 5 | 22 | 11 |
+| 3 | Claude Code Configuration & Workflows | 20% | 6 | 24 | 12 |
+| 4 | Prompt Engineering & Structured Output | 20% | 6 | 24 | 12 |
+| 5 | Context Management & Reliability | 15% | 6 | 18 | 9 |
+| | **Total** | **100%** | **30** | **120** | **60** |
 
 Each question is set in one of the six exam scenarios. The real exam
 presents four of them.
 
 | Scenario | Questions |
 |---|---|
-| Customer support agent | 11 |
-| Code generation with Claude Code | 10 |
-| Multi-agent research | 12 |
-| Developer productivity | 10 |
-| Claude Code in CI | 9 |
-| Structured data extraction | 8 |
+| Customer support agent | 22 |
+| Code generation with Claude Code | 25 |
+| Multi-agent research | 21 |
+| Developer productivity | 20 |
+| Claude Code in CI | 14 |
+| Structured data extraction | 18 |
 
-Five questions ask for two answers, as the exam's multiple-response items
-do.
+Ten questions ask for two answers, as the exam's multiple-response items
+do. Every question was written for this page from the public exam guide;
+none is a real exam item. Questions 61–120 have no diagram, and their
+answers are explained in text.
 
 ## Study modes
 
@@ -159,9 +162,12 @@ After you answer, every wrong option shows the trap it belongs to.
 **Take the exam** opens a timed run that's as close to the real exam as the
 page can make it:
 
-1. **All 60 questions, grouped by scenario.** The scenarios come in a
-   random order, and the questions inside each one are shuffled. Each
-   question shows its scenario first, as the exam does.
+1. **60 questions drawn from the 120, grouped by scenario.** Each attempt
+   draws a fixed number of questions per task statement (the quota in the
+   bank), so every exam keeps the guide's proportions with a new set of
+   questions. The scenarios come in a random order, and the questions
+   inside each one are shuffled. Each question shows its scenario first, as
+   the exam does.
 2. **120 minutes in one block, with no breaks.** The clock starts when you
    confirm, and it can't be paused. You can hide the clock, but it keeps
    running.
@@ -198,9 +204,12 @@ but unsure, or wrong. From that it shows:
   every question you haven't answered yet counted as a guess (25%):
 
   ```text
-  readiness = 100 + 900 × average(score per question)
+  readiness = 100 + 900 × Σ (quota of task statement ÷ 60) × average(score of its questions)
   score = share of the last 3 answers that were right (an unsure right answer counts as half)
   ```
+
+  Each task statement weighs what it weighs in the exam, however many
+  questions it has in the bank.
 
   Questions you've already seen are easier to remember, so treat it as a
   ceiling, not a forecast.
@@ -300,14 +309,16 @@ The bank is the `<script type="application/json" id="bank">` block in
 | `cards` | `id`, `n`, `d`, `ob` (task statement), `sc` (scenario), `q` `[en, es]`, `o` (options as `[en, es]` pairs), `a` (correct option indexes), `x` and `w` (explanations), `tr` (one trap key per option, `null` for correct ones), `fixed` (keep option order), `dia` (diagram), `src` |
 | `traps` | `k`, `name` `[en, es]`, `desc` `[en, es]`, `spot` `[en, es]` (how to recognize it) |
 | `dias` | Inline SVG diagrams, keyed by the id that a card's `dia` names |
-| `exam` | `minutes`, `pass`, and `tips` |
+| `exam` | `minutes`, `pass`, `tips`, and `quota` (questions drawn per task statement) |
 | `defaults` | The starting study mode and timer settings |
 | `params`, `code` | API-parameter and code walk-through cards (empty in this build) |
 
 After an edit:
 
-- **The exam uses every card.** Adding or removing cards changes the exam
-  length and the score's denominator.
+- **Keep the quota in step with the bank.** The `exam.quota` values must
+  add up to the exam length (60), and each task statement needs at least
+  as many questions as its quota. Without a quota, the exam uses every
+  question in the bank.
 - **Give each card a scenario.** The exam groups questions by `sc`, and
   the card shows the scenario above the question.
 - **Write both languages.** Every text field needs an English and a
